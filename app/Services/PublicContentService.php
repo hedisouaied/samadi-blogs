@@ -211,8 +211,8 @@ class PublicContentService
     {
         return Tag::query()
             ->active()
+            ->whereHas('articles', fn ($query) => $query->published())
             ->withCount(['articles as published_articles_count' => fn ($query) => $query->published()])
-            ->having('published_articles_count', '>', 0)
             ->orderByDesc('published_articles_count')
             ->limit($limit)
             ->get();
