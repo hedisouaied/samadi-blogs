@@ -1,6 +1,9 @@
 {
     "name": "Samadi Blogs",
-    "image": "mcr.microsoft.com/devcontainers/php:8.3",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
     "features": {
         "ghcr.io/devcontainers/features/github-cli:1": {},
         "ghcr.io/devcontainers/features/sshd:1": {

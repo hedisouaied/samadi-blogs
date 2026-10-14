@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 cd "$(dirname "$0")/.."
 
-if ! pgrep -f "artisan serve" >/dev/null 2>&1; then
+if ! (ss -ltn 2>/dev/null | grep -q ':8000'); then
     echo "==> Starting Laravel on port 8000"
-    nohup php artisan serve --host=0.0.0.0 --port=8000 >/tmp/laravel-serve.log 2>&1 &
+    setsid nohup php artisan serve --host=0.0.0.0 --port=8000 \
+        >/tmp/laravel-serve.log 2>&1 </dev/null &
 fi
 
 if ! pgrep -f "cloudflared tunnel" >/dev/null 2>&1; then
@@ -15,6 +16,6 @@ if ! pgrep -f "cloudflared tunnel" >/dev/null 2>&1; then
         chmod +x "$HOME/cloudflared" || true
     fi
     echo "==> Starting Cloudflare quick tunnel"
-    nohup "$HOME/cloudflared" tunnel --url http://localhost:8000 --no-autoupdate \
-        > "$HOME/cloudflared.log" 2>&1 &
+    setsid nohup "$HOME/cloudflared" tunnel --url http://localhost:8000 --no-autoupdate \
+        >"$HOME/cloudflared.log" 2>&1 </dev/null &
 fi
