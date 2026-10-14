@@ -1,6 +1,10 @@
 # Environment files
+.env
 .env.*
 !.env.example
+
+# Generated storage symlink (created at deploy time via storage:link)
+/public/storage
 
 # Laravel runtime files
 /bootstrap/cache/*.php
