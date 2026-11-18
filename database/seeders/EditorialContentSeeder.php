@@ -38,7 +38,7 @@ class EditorialContentSeeder extends Seeder
 
     public function run(): void
     {
-        if (app()->environment('production')) {
+        if (app()->environment('production') && Article::withTrashed()->exists()) {
             return;
         }
 
