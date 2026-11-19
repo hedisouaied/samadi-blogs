@@ -23,7 +23,7 @@ class EditMedia extends EditRecord
                     app(MediaService::class)->deleteFile($record);
                     $record->delete();
 
-                    Notification::make()->title('Media deleted')->success()->send();
+                    Notification::make()->title(__('Media deleted'))->success()->send();
 
                     $this->redirect(MediaResource::getUrl('index'));
                 }),

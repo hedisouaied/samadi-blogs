@@ -18,22 +18,22 @@ enum UserRole: string implements HasColor, HasDescription, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::SuperAdmin => 'Super Admin',
-            self::Admin => 'Admin',
-            self::Editor => 'Editor',
-            self::Author => 'Author',
-            self::Moderator => 'Moderator',
+            self::SuperAdmin => __('Super Admin'),
+            self::Admin => __('Admin'),
+            self::Editor => __('Editor'),
+            self::Author => __('Author'),
+            self::Moderator => __('Moderator'),
         };
     }
 
     public function getDescription(): string
     {
         return match ($this) {
-            self::SuperAdmin => 'Full unrestricted access to every part of the back office.',
-            self::Admin => 'Full access to content and administration, with limited system-level control.',
-            self::Editor => 'Manage and publish all content, moderate comments and maintain taxonomy.',
-            self::Author => 'Create and manage their own articles and submit them for review.',
-            self::Moderator => 'Moderate and manage comments only.',
+            self::SuperAdmin => __('Full unrestricted access to every part of the back office.'),
+            self::Admin => __('Full access to content and administration, with limited system-level control.'),
+            self::Editor => __('Manage and publish all content, moderate comments and maintain taxonomy.'),
+            self::Author => __('Create and manage their own articles and submit them for review.'),
+            self::Moderator => __('Moderate and manage comments only.'),
         };
     }
 

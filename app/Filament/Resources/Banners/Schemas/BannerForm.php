@@ -21,7 +21,7 @@ class BannerForm
     {
         return $schema
             ->components([
-                Section::make('Banner content')
+                Section::make(__('Banner content'))
                     ->columns(2)
                     ->components([
                         TextInput::make('title')
@@ -48,7 +48,7 @@ class BannerForm
                         TextInput::make('button_text')
                             ->label('Call to action label')
                             ->maxLength(60)
-                            ->helperText('Leave empty to render no button.'),
+                            ->helperText(__('Leave empty to render no button.')),
                         TextInput::make('target_url')
                             ->label('Button target URL')
                             ->url()
@@ -56,7 +56,7 @@ class BannerForm
                         Toggle::make('open_in_new_tab')->label('Open in a new tab')->default(true)->inline(false),
                     ]),
 
-                Section::make('Media')
+                Section::make(__('Media'))
                     ->columns(2)
                     ->components([
                         FileUpload::make('image_path')
@@ -79,10 +79,10 @@ class BannerForm
                             ->label('Alt text')
                             ->maxLength(180)
                             ->columnSpanFull()
-                            ->helperText('Describe the image for accessibility and SEO.'),
+                            ->helperText(__('Describe the image for accessibility and SEO.')),
                     ]),
 
-                Section::make('Placement & scheduling')
+                Section::make(__('Placement & scheduling'))
                     ->columns(3)
                     ->components([
                         Select::make('placement')
@@ -90,7 +90,7 @@ class BannerForm
                             ->options(BannerPlacement::options())
                             ->required()
                             ->native(false)
-                            ->helperText('Where the banner is rendered on the public site.'),
+                            ->helperText(__('Where the banner is rendered on the public site.')),
                         Select::make('status')
                             ->options(BannerStatus::options())
                             ->default(BannerStatus::Draft->value)

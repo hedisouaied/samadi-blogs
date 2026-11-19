@@ -4,7 +4,7 @@
             {{ $errors->any() ? 'border-accent/40 bg-surface text-accent' : 'border-line bg-surface text-ink' }}">
             <x-frontend.icon :name="$errors->any() ? 'alert' : 'check'" class="h-4 w-4 shrink-0" />
             <span>{{ $errors->any() ? $errors->first() : session('newsletter_status') }}</span>
-            <button type="button" data-toast-close aria-label="Dismiss" class="ml-2 text-muted transition-colors hover:text-ink">
+            <button type="button" data-toast-close aria-label="{{ __('Dismiss') }}" class="ms-2 text-muted transition-colors hover:text-ink">
                 <x-frontend.icon name="close" class="h-4 w-4" />
             </button>
         </div>

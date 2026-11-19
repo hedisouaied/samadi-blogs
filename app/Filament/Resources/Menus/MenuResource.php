@@ -20,11 +20,13 @@ use UnitEnum;
 
 class MenuResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = Menu::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBars3;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Content';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Content;
 
     protected static ?int $navigationSort = 6;
 

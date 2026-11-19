@@ -17,27 +17,27 @@
     @csrf
 
     <div class="absolute h-0 w-0 overflow-hidden" aria-hidden="true">
-        <label for="{{ $id }}-website">Leave this field empty</label>
+        <label for="{{ $id }}-website">{{ __('Leave this field empty') }}</label>
         <input id="{{ $id }}-website" type="text" name="website" tabindex="-1" autocomplete="off">
     </div>
 
     <div class="space-y-3">
         @unless ($compact)
             <div>
-                <label for="{{ $id }}-name" class="{{ $labelClass }}">Name <span class="normal-case tracking-normal text-muted">(optional)</span></label>
+                <label for="{{ $id }}-name" class="{{ $labelClass }}">{{ __('Name') }} <span class="normal-case tracking-normal text-muted">({{ __('optional') }})</span></label>
                 <input id="{{ $id }}-name" name="name" type="text" autocomplete="name"
-                    class="{{ $fieldClass }}" placeholder="Ada Lovelace">
+                    class="{{ $fieldClass }}" placeholder="{{ __('Ada Lovelace') }}">
             </div>
         @endunless
 
         <div>
-            <label for="{{ $id }}-email" class="{{ $labelClass }}">Email address</label>
+            <label for="{{ $id }}-email" class="{{ $labelClass }}">{{ __('Email address') }}</label>
             <div class="flex flex-col gap-2 sm:flex-row">
                 <input id="{{ $id }}-email" name="email" type="email" required autocomplete="email"
-                    class="{{ $fieldClass }}" placeholder="you@example.com">
+                    class="{{ $fieldClass }}" placeholder="{{ __('you@example.com') }}">
                 <button type="submit"
                     class="btn {{ $dark ? '!bg-white !text-ink hover:!bg-accent hover:!text-accent-ink' : 'btn-primary' }} shrink-0">
-                    <span data-newsletter-label>Subscribe</span>
+                    <span data-newsletter-label>{{ __('Subscribe') }}</span>
                     <x-frontend.icon name="arrow-right" class="h-4 w-4" />
                 </button>
             </div>
@@ -46,7 +46,7 @@
         <label class="flex items-start gap-3 text-sm {{ $dark ? 'text-white/70' : 'text-muted' }}">
             <input type="checkbox" name="consent" value="1" required
                 class="mt-0.5 h-4 w-4 shrink-0 rounded border-line-strong text-accent focus:ring-accent">
-            <span>{{ setting('newsletter.consent_wording', 'I agree to receive email updates and accept the privacy policy.') }}</span>
+            <span>{{ __(setting('newsletter.consent_wording', 'I agree to receive email updates and accept the privacy policy.')) }}</span>
         </label>
     </div>
 

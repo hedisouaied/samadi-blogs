@@ -34,7 +34,7 @@ class ViewArticleRevision extends ViewRecord
                 ->icon('heroicon-o-arrow-uturn-left')
                 ->color('warning')
                 ->requiresConfirmation()
-                ->modalDescription('Apply this snapshot back to the live article? A fresh revision is recorded first.')
+                ->modalDescription(__('Apply this snapshot back to the live article? A fresh revision is recorded first.'))
                 ->action(function (): void {
                     $record = $this->getRecord();
                     $article = $record->article;
@@ -48,7 +48,7 @@ class ViewArticleRevision extends ViewRecord
 
                     app(ArticleService::class)->captureRevision($article, Auth::user(), "Restored from revision #{$record->getKey()}");
 
-                    Notification::make()->title('Revision restored')->success()->send();
+                    Notification::make()->title(__('Revision restored'))->success()->send();
 
                     $this->redirect(ArticleResource::getUrl('edit', ['record' => $article]));
                 });

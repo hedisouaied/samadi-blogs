@@ -17,7 +17,7 @@ class CommentForm
     {
         return $schema
             ->components([
-                Section::make('Comment')
+                Section::make(__('Comment'))
                     ->columns(2)
                     ->components([
                         Textarea::make('content')
@@ -35,7 +35,7 @@ class CommentForm
                                     return '';
                                 }
 
-                                return 'Approving a reply requires its parent comment to be approved too.';
+                                return __('Approving a reply requires its parent comment to be approved too.');
                             }),
                         Toggle::make('is_pinned')->label('Pinned')->default(false)->inline(false),
                         Select::make('article_id')
@@ -50,11 +50,11 @@ class CommentForm
                             ->relationship('parent', 'content')
                             ->searchable()
                             ->preload()
-                            ->placeholder('Root comment')
+                            ->placeholder(__('Root comment'))
                             ->native(false),
                     ]),
 
-                Section::make('Author')
+                Section::make(__('Author'))
                     ->columns(2)
                     ->components([
                         Select::make('user_id')
@@ -62,15 +62,15 @@ class CommentForm
                             ->relationship('user', 'name')
                             ->searchable()
                             ->preload()
-                            ->placeholder('Guest comment'),
+                            ->placeholder(__('Guest comment')),
                         TextInput::make('author_name')->label('Guest name')->maxLength(120),
                         TextInput::make('author_email')->label('Guest email')->email()->maxLength(190),
                     ]),
 
-                Section::make('Moderation meta')
+                Section::make(__('Moderation meta'))
                     ->columns(3)
                     ->components([
-                        TextInput::make('ip_address')->label('IP address')->disabled()->dehydrated(false)->placeholder('—'),
+                        TextInput::make('ip_address')->label('IP address')->disabled()->dehydrated(false)->placeholder(__('—')),
                         TextInput::make('user_agent')->label('User agent')->disabled()->dehydrated(false)->columnSpan(2),
                     ]),
             ]);

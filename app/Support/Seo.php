@@ -45,7 +45,7 @@ class Seo
             'image' => $image,
             'image_alt' => (string) ($overrides['image_alt'] ?? $title),
             'site_name' => $siteName,
-            'locale' => str_replace('_', '-', (string) setting('general.default_language', 'en')),
+            'locale' => ['en' => 'en-US', 'fr' => 'fr-FR', 'ar' => 'ar-AR'][app()->getLocale()] ?? app()->getLocale(),
             'published_at' => $overrides['published_at'] ?? null,
             'updated_at' => $overrides['updated_at'] ?? null,
             'author' => $overrides['author'] ?? null,

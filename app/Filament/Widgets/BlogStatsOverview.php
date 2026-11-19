@@ -42,7 +42,7 @@ class BlogStatsOverview extends StatsOverviewWidget
             $published = Article::query()->where('status', ArticleStatus::Published->value)->count();
             $pending = Article::query()->where('status', ArticleStatus::PendingReview->value)->count();
 
-            $stats[] = Stat::make('Articles', (string) $total)
+            $stats[] = Stat::make(__('Articles'), (string) $total)
                 ->description($published.' published · '.$pending.' in review')
                 ->descriptionIcon('heroicon-m-document-text')
                 ->color('primary')
@@ -54,7 +54,7 @@ class BlogStatsOverview extends StatsOverviewWidget
             $pendingComments = Comment::query()->where('status', CommentStatus::Pending->value)->count();
             $approvedComments = Comment::query()->where('status', CommentStatus::Approved->value)->count();
 
-            $stats[] = Stat::make('Comments', (string) $pendingComments)
+            $stats[] = Stat::make(__('Comments'), (string) $pendingComments)
                 ->description($approvedComments.' approved · '.$pendingComments.' awaiting')
                 ->descriptionIcon('heroicon-m-chat-bubble-left-right')
                 ->color($pendingComments > 0 ? 'warning' : 'success')
@@ -66,7 +66,7 @@ class BlogStatsOverview extends StatsOverviewWidget
             $subscribed = NewsletterSubscriber::query()->where('status', SubscriberStatus::Subscribed->value)->count();
             $totalSubs = NewsletterSubscriber::query()->count();
 
-            $stats[] = Stat::make('Subscribers', (string) $subscribed)
+            $stats[] = Stat::make(__('Subscribers'), (string) $subscribed)
                 ->description($totalSubs.' total records')
                 ->descriptionIcon('heroicon-m-envelope')
                 ->color('success')
@@ -75,8 +75,8 @@ class BlogStatsOverview extends StatsOverviewWidget
         }
 
         if ($user?->hasPermission(Permission::ViewMedia)) {
-            $stats[] = Stat::make('Media assets', (string) Media::query()->count())
-                ->description('Reusable library files')
+            $stats[] = Stat::make(__('Media assets'), (string) Media::query()->count())
+                ->description(__('Reusable library files'))
                 ->descriptionIcon('heroicon-m-photo')
                 ->color('info')
                 ->icon('heroicon-o-photo')
@@ -87,7 +87,7 @@ class BlogStatsOverview extends StatsOverviewWidget
             $activeUsers = User::query()->active()->count();
             $totalUsers = User::query()->count();
 
-            $stats[] = Stat::make('Team members', (string) $totalUsers)
+            $stats[] = Stat::make(__('Team members'), (string) $totalUsers)
                 ->description($activeUsers.' active')
                 ->descriptionIcon('heroicon-m-users')
                 ->color('gray')

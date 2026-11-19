@@ -23,7 +23,7 @@ class AuthorController extends Controller
             'categories' => $this->content->categories(),
             'seo' => Seo::make([
                 'title' => $author->name,
-                'description' => 'Articles and essays written by '.$author->name.'.',
+                'description' => __('Articles and essays written by :name.', ['name' => $author->name]),
                 'canonical' => route('authors.show', $author->username ?: $author->getKey()),
                 'image' => $author->getFilamentAvatarUrl(),
                 'schema' => [

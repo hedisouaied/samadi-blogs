@@ -15,7 +15,7 @@ class NewsletterSubscriberForm
     {
         return $schema
             ->components([
-                Section::make('Subscriber')
+                Section::make(__('Subscriber'))
                     ->columns(2)
                     ->components([
                         TextInput::make('email')
@@ -33,14 +33,14 @@ class NewsletterSubscriberForm
                         TextInput::make('source')
                             ->label('Acquisition source')
                             ->maxLength(120)
-                            ->placeholder('e.g. footer, popup, import'),
+                            ->placeholder(__('e.g. footer, popup, import')),
                     ]),
 
-                Section::make('Consent & activity')
+                Section::make(__('Consent & activity'))
                     ->columns(3)
                     ->components([
                         DateTimePicker::make('consent_at')->label('Consent given at')->seconds(false)->native(false)->nullable(),
-                        TextInput::make('consent_source')->label('Consent source')->maxLength(120)->placeholder('e.g. signup checkbox'),
+                        TextInput::make('consent_source')->label('Consent source')->maxLength(120)->placeholder(__('e.g. signup checkbox')),
                         DateTimePicker::make('subscribed_at')->label('Subscribed at')->seconds(false)->native(false)->nullable(),
                         DateTimePicker::make('unsubscribed_at')->label('Unsubscribed at')->seconds(false)->native(false)->nullable(),
                         DateTimePicker::make('last_email_sent_at')->label('Last email sent at')->seconds(false)->native(false)->nullable(),

@@ -46,6 +46,10 @@
     ];
 
     $path = $icons[$name] ?? $icons['sparkles'];
+
+    if (in_array($name, ['arrow-right', 'arrow-left', 'arrow-up-right', 'chevron-right', 'chevron-left'], true)) {
+        $class .= ' rtl:-scale-x-100';
+    }
 @endphp
 
 <svg {{ $attributes->merge(['class' => $class]) }} xmlns="http://www.w3.org/2000/svg" fill="none"

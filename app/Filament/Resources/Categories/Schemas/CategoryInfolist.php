@@ -15,7 +15,7 @@ class CategoryInfolist
     {
         return $schema
             ->components([
-                Section::make('Category')
+                Section::make(__('Category'))
                     ->columns(3)
                     ->components([
                         ImageEntry::make('image_path')
@@ -24,7 +24,7 @@ class CategoryInfolist
                             ->height(140),
                         TextEntry::make('name')->weight('bold')->size('lg'),
                         TextEntry::make('slug')->copyable()->prefix('/category/'),
-                        TextEntry::make('parent.name')->label('Parent category')->placeholder('Top level'),
+                        TextEntry::make('parent.name')->label('Parent category')->placeholder(__('Top level')),
                         TextEntry::make('articles_count')
                             ->label('Articles')
                             ->state(fn (Category $record): int => $record->articles()->count())
@@ -36,10 +36,10 @@ class CategoryInfolist
                             ->badge()
                             ->color('info'),
                         TextEntry::make('sort_order')->label('Sort order')->badge()->color('gray'),
-                        TextEntry::make('description')->columnSpanFull()->placeholder('No description.'),
+                        TextEntry::make('description')->columnSpanFull()->placeholder(__('No description.')),
                     ]),
 
-                Section::make('Visibility')
+                Section::make(__('Visibility'))
                     ->columns(3)
                     ->components([
                         IconEntry::make('is_active')->boolean()->label('Active'),
@@ -47,11 +47,11 @@ class CategoryInfolist
                         IconEntry::make('show_in_menu')->boolean()->label('Show in menu'),
                     ]),
 
-                Section::make('SEO')
+                Section::make(__('SEO'))
                     ->columns(2)
                     ->components([
-                        TextEntry::make('seo_title')->placeholder('—'),
-                        TextEntry::make('seo_description')->placeholder('—'),
+                        TextEntry::make('seo_title')->placeholder(__('—')),
+                        TextEntry::make('seo_description')->placeholder(__('—')),
                         TextEntry::make('created_at')->label('Created')->dateTime('M j, Y'),
                         TextEntry::make('updated_at')->label('Updated')->since(),
                     ]),

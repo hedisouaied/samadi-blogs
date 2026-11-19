@@ -22,11 +22,13 @@ use UnitEnum;
 
 class CommentResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = Comment::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChatBubbleLeftRight;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Community';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Community;
 
     protected static ?int $navigationSort = 1;
 

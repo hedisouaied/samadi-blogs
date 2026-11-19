@@ -22,12 +22,12 @@ class EditComment extends EditRecord
             ViewAction::make(),
             DeleteAction::make()
                 ->requiresConfirmation()
-                ->modalDescription('Replies are preserved and re-attached to this comment\'s parent.')
+                ->modalDescription(__('Replies are preserved and re-attached to this comment\'s parent.'))
                 ->action(function (Comment $record): void {
                     app(CommentService::class)->deletePreservingReplies($record, Auth::user());
 
                     Notification::make()
-                        ->title('Comment deleted')
+                        ->title(__('Comment deleted'))
                         ->success()
                         ->send();
                 }),

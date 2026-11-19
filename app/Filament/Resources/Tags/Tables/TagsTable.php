@@ -48,7 +48,7 @@ class TagsTable
                         ->icon('heroicon-o-power')
                         ->action(function (Tag $record): void {
                             $record->update(['is_active' => ! $record->is_active]);
-                            Notification::make()->title('Tag updated')->success()->send();
+                            Notification::make()->title(__('Tag updated'))->success()->send();
                         }),
                     DeleteAction::make(),
                 ]),
@@ -60,8 +60,8 @@ class TagsTable
                     ForceDeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No tags yet')
-            ->emptyStateDescription('Tags help readers discover related articles.')
+            ->emptyStateHeading(__('No tags yet'))
+            ->emptyStateDescription(__('Tags help readers discover related articles.'))
             ->emptyStateIcon('heroicon-o-tag');
     }
 }

@@ -27,7 +27,10 @@ class ItemsRelationManager extends RelationManager
 {
     protected static string $relationship = 'items';
 
-    protected static ?string $title = 'Menu items';
+    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    {
+        return __('Menu items');
+    }
 
     public function form(Schema $schema): Schema
     {
@@ -72,7 +75,7 @@ class ItemsRelationManager extends RelationManager
                     ->searchable()
                     ->preload()
                     ->native(false)
-                    ->placeholder('Top level'),
+                    ->placeholder(__('Top level')),
                 TextInput::make('sort_order')
                     ->label('Sort order')
                     ->numeric()
@@ -87,19 +90,21 @@ class ItemsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->modelLabel(__('menu item'))
+            ->pluralModelLabel(__('menu items'))
             ->defaultSort('sort_order')
             ->reorderable('sort_order')
             ->columns([
                 TextColumn::make('label')
                     ->weight('semibold')
-                    ->description(fn (MenuItem $record): ?string => $record->parent?->label ? '↳ under '.$record->parent->label : 'Top level'),
+                    ->description(fn (MenuItem $record): ?string => $record->parent?->label ? '↳ under '.$record->parent->label : __('Top level')),
                 TextColumn::make('type')
                     ->badge()
                     ->formatStateUsing(fn (MenuItemType $state): string => $state->getLabel())
                     ->color(fn (MenuItemType $state): string => $state->getColor()),
                 TextColumn::make('target')
                     ->label('Links to')
-                    ->state(fn (MenuItem $record): string => $record->resolveUrl() ?: '—')
+                    ->state(fn (MenuItem $record): string => $record->resolveUrl() ?: __('—'))
                     ->color('gray')
                     ->url(fn (MenuItem $record): ?string => $record->resolveUrl())
                     ->openUrlInNewTab(),
@@ -127,7 +132,7 @@ class ItemsRelationManager extends RelationManager
                     ->icon('heroicon-o-power')
                     ->action(function (MenuItem $record): void {
                         $record->update(['is_active' => ! $record->is_active]);
-                        Notification::make()->title('Item updated')->success()->send();
+                        Notification::make()->title(__('Item updated'))->success()->send();
                     }),
                 DeleteAction::make(),
             ])
@@ -136,8 +141,8 @@ class ItemsRelationManager extends RelationManager
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No menu items')
-            ->emptyStateDescription('Add links to build this menu.')
+            ->emptyStateHeading(__('No menu items'))
+            ->emptyStateDescription(__('Add links to build this menu.'))
             ->emptyStateIcon('heroicon-o-bars-3');
     }
 

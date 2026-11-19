@@ -22,7 +22,7 @@
         <div>
             <h3 class="font-display text-xl text-white md:text-2xl">{{ $category->name }}</h3>
             @if ($count)
-                <p class="mt-1 text-[0.6875rem] uppercase tracking-[0.14em] text-white/70">{{ $count }} {{ \Illuminate\Support\Str::plural('article', $count) }}</p>
+                <p class="mt-1 text-[0.6875rem] uppercase tracking-[0.14em] text-white/70">{{ trans_choice(':count article|:count articles', $count, ['count' => $count]) }}</p>
             @endif
         </div>
         <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-white transition-all duration-300 group-hover:bg-white group-hover:text-ink">

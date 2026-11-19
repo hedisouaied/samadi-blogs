@@ -15,25 +15,25 @@ class ArticleRevisionInfolist
     {
         return $schema
             ->components([
-                Section::make('Revision')
+                Section::make(__('Revision'))
                     ->columns(3)
                     ->components([
                         TextEntry::make('id')->label('Revision')->badge()->color('gray'),
                         TextEntry::make('article.title')->label('Article')->url(fn (ArticleRevision $record): string => ArticleResource::getUrl('edit', ['record' => $record->article_id])),
-                        TextEntry::make('user.name')->label('Edited by')->placeholder('System'),
+                        TextEntry::make('user.name')->label('Edited by')->placeholder(__('System')),
                         TextEntry::make('status')
                             ->badge()
                             ->formatStateUsing(fn (ArticleStatus $state): string => $state->getLabel())
                             ->color(fn (ArticleStatus $state): string => $state->getColor()),
-                        TextEntry::make('note')->placeholder('—'),
+                        TextEntry::make('note')->placeholder(__('—')),
                         TextEntry::make('created_at')->label('Saved')->dateTime('M j, Y H:i'),
                     ]),
-                Section::make('Snapshot')
+                Section::make(__('Snapshot'))
                     ->columns(2)
                     ->components([
                         TextEntry::make('title')->weight('bold')->columnSpanFull(),
                         TextEntry::make('slug')->copyable(),
-                        TextEntry::make('excerpt')->placeholder('—')->columnSpanFull(),
+                        TextEntry::make('excerpt')->placeholder(__('—'))->columnSpanFull(),
                         TextEntry::make('content')->html()->prose()->columnSpanFull(),
                     ]),
             ]);

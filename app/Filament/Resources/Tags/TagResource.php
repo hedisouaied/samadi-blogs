@@ -19,11 +19,13 @@ use UnitEnum;
 
 class TagResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = Tag::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Content';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Content;
 
     protected static ?int $navigationSort = 3;
 

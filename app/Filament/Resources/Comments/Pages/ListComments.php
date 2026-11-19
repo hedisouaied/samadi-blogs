@@ -27,19 +27,19 @@ class ListComments extends ListRecords
             ->count();
 
         return [
-            'pending' => Tab::make('Pending')
+            'pending' => Tab::make(__('Pending'))
                 ->badge(fn (): int => $pendingCount)
                 ->badgeColor('warning')
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', CommentStatus::Pending->value)),
-            'approved' => Tab::make('Approved')
+            'approved' => Tab::make(__('Approved'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', CommentStatus::Approved->value)),
-            'rejected' => Tab::make('Rejected')
+            'rejected' => Tab::make(__('Rejected'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', CommentStatus::Rejected->value)),
-            'spam' => Tab::make('Spam')
+            'spam' => Tab::make(__('Spam'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', CommentStatus::Spam->value)),
-            'trash' => Tab::make('Trash')
+            'trash' => Tab::make(__('Trash'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', CommentStatus::Trash->value)),
-            'all' => Tab::make('All'),
+            'all' => Tab::make(__('All')),
         ];
     }
 

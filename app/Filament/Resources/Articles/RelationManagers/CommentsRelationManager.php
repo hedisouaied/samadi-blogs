@@ -26,6 +26,11 @@ class CommentsRelationManager extends RelationManager
 {
     protected static string $relationship = 'comments';
 
+    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    {
+        return __('Comments');
+    }
+
     public static function isAvailable(Panel $panel): bool
     {
         return Auth::user()?->hasPermission(Permission::ViewComments) ?? false;
@@ -44,6 +49,8 @@ class CommentsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->modelLabel(__('comment'))
+            ->pluralModelLabel(__('comments'))
             ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('content')
@@ -75,11 +82,11 @@ class CommentsRelationManager extends RelationManager
                             $ok = app(CommentService::class)->approve($record, Auth::user());
 
                             if ($ok) {
-                                Notification::make()->title('Comment approved')->success()->send();
+                                Notification::make()->title(__('Comment approved'))->success()->send();
                             } else {
                                 Notification::make()
-                                    ->title('Cannot approve yet')
-                                    ->body('Approve the parent comment first.')
+                                    ->title(__('Cannot approve yet'))
+                                    ->body(__('Approve the parent comment first.'))
                                     ->warning()
                                     ->send();
                             }
@@ -91,7 +98,7 @@ class CommentsRelationManager extends RelationManager
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::ModerateComments) ?? false)
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->reject($record, Auth::user());
-                            Notification::make()->title('Comment rejected')->success()->send();
+                            Notification::make()->title(__('Comment rejected'))->success()->send();
                         }),
                     Action::make('spam')
                         ->label('Mark as spam')
@@ -99,7 +106,7 @@ class CommentsRelationManager extends RelationManager
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::ModerateComments) ?? false)
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->markAsSpam($record, Auth::user());
-                            Notification::make()->title('Marked as spam')->success()->send();
+                            Notification::make()->title(__('Marked as spam'))->success()->send();
                         }),
                     Action::make('pin')
                         ->label(fn (Comment $record): string => $record->is_pinned ? 'Unpin' : 'Pin')
@@ -107,19 +114,19 @@ class CommentsRelationManager extends RelationManager
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::ModerateComments) ?? false)
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->togglePinned($record, Auth::user());
-                            Notification::make()->title('Comment updated')->success()->send();
+                            Notification::make()->title(__('Comment updated'))->success()->send();
                         }),
                     DeleteAction::make()
                         ->requiresConfirmation()
-                        ->modalDescription('Replies are preserved and re-attached to this comment\'s parent.')
+                        ->modalDescription(__('Replies are preserved and re-attached to this comment\'s parent.'))
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->deletePreservingReplies($record, Auth::user());
-                            Notification::make()->title('Comment deleted')->success()->send();
+                            Notification::make()->title(__('Comment deleted'))->success()->send();
                         }),
                 ]),
             ])
             ->toolbarActions([])
-            ->emptyStateHeading('No comments yet')
-            ->emptyStateDescription('Comments on this article will appear here.');
+            ->emptyStateHeading(__('No comments yet'))
+            ->emptyStateDescription(__('Comments on this article will appear here.'));
     }
 }

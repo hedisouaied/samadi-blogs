@@ -16,7 +16,7 @@ class BannerInfolist
     {
         return $schema
             ->components([
-                Section::make('Banner')
+                Section::make(__('Banner'))
                     ->columns(3)
                     ->components([
                         ImageEntry::make('image_path')
@@ -34,25 +34,25 @@ class BannerInfolist
                             ->formatStateUsing(fn (BannerStatus $state): string => $state->getLabel())
                             ->color(fn (BannerStatus $state): string => $state->getColor()),
                         IconEntry::make('is_active')->label('Active')->boolean(),
-                        TextEntry::make('subtitle')->placeholder('—'),
-                        TextEntry::make('button_text')->placeholder('No button'),
-                        TextEntry::make('target_url')->copyable()->placeholder('—'),
-                        TextEntry::make('alt_text')->placeholder('—'),
+                        TextEntry::make('subtitle')->placeholder(__('—')),
+                        TextEntry::make('button_text')->placeholder(__('No button')),
+                        TextEntry::make('target_url')->copyable()->placeholder(__('—')),
+                        TextEntry::make('alt_text')->placeholder(__('—')),
                     ]),
-                Section::make('Schedule')
+                Section::make(__('Schedule'))
                     ->columns(3)
                     ->components([
-                        TextEntry::make('starts_at')->label('Starts')->dateTime('M j, Y H:i')->placeholder('Immediately'),
-                        TextEntry::make('ends_at')->label('Ends')->dateTime('M j, Y H:i')->placeholder('No end date'),
+                        TextEntry::make('starts_at')->label('Starts')->dateTime('M j, Y H:i')->placeholder(__('Immediately')),
+                        TextEntry::make('ends_at')->label('Ends')->dateTime('M j, Y H:i')->placeholder(__('No end date')),
                         TextEntry::make('sort_order')->label('Sort order')->badge()->color('gray'),
                         TextEntry::make('within_schedule')
                             ->label('In schedule')
-                            ->state(fn ($record): string => $record->isWithinSchedule() ? 'Yes' : 'No')
+                            ->state(fn ($record): string => $record->isWithinSchedule() ? __('Yes') : __('No'))
                             ->badge()
                             ->color(fn ($record): string => $record->isWithinSchedule() ? 'success' : 'gray'),
                         TextEntry::make('displayable')
                             ->label('Displayable now')
-                            ->state(fn ($record): string => $record->isDisplayable() ? 'Yes' : 'No')
+                            ->state(fn ($record): string => $record->isDisplayable() ? __('Yes') : __('No'))
                             ->badge()
                             ->color(fn ($record): string => $record->isDisplayable() ? 'success' : 'gray'),
                         TextEntry::make('created_at')->label('Created')->dateTime('M j, Y'),

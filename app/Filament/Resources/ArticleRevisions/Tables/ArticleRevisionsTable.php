@@ -23,8 +23,8 @@ class ArticleRevisionsTable
                     ->badge()
                     ->formatStateUsing(fn (ArticleStatus $state): string => $state->getLabel())
                     ->color(fn (ArticleStatus $state): string => $state->getColor()),
-                TextColumn::make('user.name')->label('Edited by')->placeholder('System')->toggleable(),
-                TextColumn::make('note')->limit(40)->placeholder('—')->color('gray')->toggleable(),
+                TextColumn::make('user.name')->label('Edited by')->placeholder(__('System'))->toggleable(),
+                TextColumn::make('note')->limit(40)->placeholder(__('—'))->color('gray')->toggleable(),
                 TextColumn::make('created_at')->label('Saved')->since()->sortable(),
             ])
             ->filters([
@@ -36,8 +36,8 @@ class ArticleRevisionsTable
                     ->url(fn (ArticleRevision $record): string => ArticleRevisionResource::getUrl('view', ['record' => $record]))
                     ->openUrlInNewTab(false),
             ])
-            ->emptyStateHeading('No revisions')
-            ->emptyStateDescription('Revisions are captured automatically as articles change.')
+            ->emptyStateHeading(__('No revisions'))
+            ->emptyStateDescription(__('Revisions are captured automatically as articles change.'))
             ->emptyStateIcon('heroicon-o-clock');
     }
 }

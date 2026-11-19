@@ -17,7 +17,7 @@ class TagForm
     {
         return $schema
             ->components([
-                Section::make('Tag details')
+                Section::make(__('Tag details'))
                     ->columns(2)
                     ->components([
                         TextInput::make('name')

@@ -16,7 +16,7 @@ class MenuForm
     {
         return $schema
             ->components([
-                Section::make('Menu')
+                Section::make(__('Menu'))
                     ->columns(2)
                     ->components([
                         TextInput::make('name')
@@ -33,7 +33,7 @@ class MenuForm
                             ->maxLength(140)
                             ->alphaDash()
                             ->unique(ignoreRecord: true)
-                            ->helperText('Identifier used to render the menu on the public site.'),
+                            ->helperText(__('Identifier used to render the menu on the public site.')),
                         Textarea::make('description')
                             ->rows(2)
                             ->maxLength(500)

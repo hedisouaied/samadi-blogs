@@ -7,7 +7,7 @@
     $panelId = 'reply-'.$comment->getKey();
 @endphp
 
-<li class="{{ $depth > 0 ? 'border-l border-line pl-5 sm:pl-8' : '' }}">
+<li class="{{ $depth > 0 ? 'border-s border-line ps-5 sm:ps-8' : '' }}">
     <article class="flex gap-4">
         <span class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-sunken text-sm font-semibold text-ink">
             @if ($avatar)
@@ -22,7 +22,7 @@
                 <span class="font-medium text-ink">{{ $name }}</span>
                 @if ($comment->is_pinned)
                     <span class="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-accent">
-                        Pinned
+                        {{ __('Pinned') }}
                     </span>
                 @endif
                 <time datetime="{{ $comment->created_at?->toIso8601String() }}" class="text-xs text-muted">
@@ -38,13 +38,13 @@
                 <button type="button" data-reply-toggle data-reply-target="{{ $panelId }}"
                     class="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.12em] text-muted transition-colors hover:text-accent">
                     <x-frontend.icon name="chat" class="h-3.5 w-3.5" />
-                    Reply
+                    {{ __('Reply') }}
                 </button>
             </div>
         </div>
     </article>
 
-    <div id="{{ $panelId }}" data-reply-panel class="mt-4 ml-14 hidden">
+    <div id="{{ $panelId }}" data-reply-panel class="mt-4 ms-14 hidden">
         <x-frontend.comment-form :article="$article" :parent-id="$comment->getKey()" compact />
     </div>
 

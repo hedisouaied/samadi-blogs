@@ -14,7 +14,7 @@
             <div class="h-full w-full bg-gradient-to-br from-ink to-accent"></div>
         @endif
 
-        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r rtl:bg-gradient-to-l from-black/80 via-black/45 to-transparent"></div>
 
         <div class="absolute inset-0 flex items-center">
             <div class="max-w-xl p-6 md:p-10">
@@ -34,8 +34,8 @@
             </div>
         </div>
 
-        <span class="absolute right-4 top-4 rounded-full bg-black/40 px-2.5 py-1 text-[0.625rem] uppercase tracking-[0.16em] text-white/70 backdrop-blur">
-            Sponsored
+        <span class="absolute end-4 top-4 rounded-full bg-black/40 px-2.5 py-1 text-[0.625rem] uppercase tracking-[0.16em] text-white/70 backdrop-blur">
+            {{ __('Sponsored') }}
         </span>
     </a>
 @endif

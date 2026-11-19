@@ -15,9 +15,9 @@ enum MenuItemType: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::CustomUrl => 'Custom / Internal URL',
-            self::Category => 'Category',
-            self::Article => 'Article',
+            self::CustomUrl => __('Custom / Internal URL'),
+            self::Category => __('Category'),
+            self::Article => __('Article'),
         };
     }
 

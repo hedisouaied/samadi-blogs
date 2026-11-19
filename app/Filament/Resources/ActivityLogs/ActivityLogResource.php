@@ -19,11 +19,13 @@ use UnitEnum;
 
 class ActivityLogResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = ActivityLog::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedChartBarSquare;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Administration';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Administration;
 
     protected static ?int $navigationSort = 2;
 

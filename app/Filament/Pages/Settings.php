@@ -29,18 +29,24 @@ class Settings extends Page
 {
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Administration';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Administration;
 
     protected static ?int $navigationSort = 1;
-
-    protected static ?string $title = 'Settings';
-
-    protected static ?string $navigationLabel = 'Settings';
 
     protected string $view = 'filament.pages.settings';
 
     /** @var array<string, mixed> */
     public ?array $data = [];
+
+    public function getTitle(): string
+    {
+        return __('Settings');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('Settings');
+    }
 
     public static function canAccess(): bool
     {
@@ -81,8 +87,8 @@ class Settings extends Page
             $tabs[] = Tabs\Tab::make($definition['label'] ?? ucfirst($group))
                 ->icon($definition['icon'] ?? null)
                 ->schema([
-                    Section::make($definition['label'] ?? ucfirst($group))
-                        ->description($definition['description'] ?? null)
+                    Section::make(__($definition['label'] ?? ucfirst($group)))
+                        ->description(isset($definition['description']) ? __($definition['description']) : null)
                         ->schema($fields)
                         ->columns(2),
                 ]);
@@ -102,7 +108,7 @@ class Settings extends Page
     {
         $name = $group.'__'.$key;
         $label = $meta['label'] ?? ucfirst(str_replace('_', ' ', $key));
-        $helper = isset($meta['helper']) ? new HtmlString(e($meta['helper'])) : null;
+        $helper = isset($meta['helper']) ? new HtmlString(e(__($meta['helper']))) : null;
 
         $field = match ($meta['type'] ?? 'string') {
             'text' => Textarea::make($name)->rows(3)->maxLength($meta['max'] ?? 1000),
@@ -124,7 +130,7 @@ class Settings extends Page
                 ->options(fn (): array => User::query()->orderBy('name')->pluck('name', 'id')->all())
                 ->searchable()
                 ->native(false)
-                ->placeholder('No default'),
+                ->placeholder(__('No default')),
             'string' => TextInput::make($name)
                 ->maxLength($meta['max'] ?? 255)
                 ->email($meta['email'] ?? false)
@@ -153,7 +159,7 @@ class Settings extends Page
             return $resolved;
         }
 
-        return is_array($options) ? $options : [];
+        return is_array($options) ? array_map(fn ($label) => is_string($label) ? __($label) : $label, $options) : [];
     }
 
     /**
@@ -176,7 +182,7 @@ class Settings extends Page
     public function save(): void
     {
         if (! (Filament::auth()->user()?->hasPermission(Permission::ManageSettings) ?? false)) {
-            Notification::make()->title('You are not allowed to change settings')->danger()->send();
+            Notification::make()->title(__('You are not allowed to change settings'))->danger()->send();
 
             return;
         }
@@ -191,6 +197,6 @@ class Settings extends Page
 
         app(SettingsService::class)->setMany($values);
 
-        Notification::make()->title('Settings saved')->success()->send();
+        Notification::make()->title(__('Settings saved'))->success()->send();
     }
 }

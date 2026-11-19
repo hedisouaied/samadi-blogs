@@ -3,22 +3,22 @@
 @section('content')
     <section class="shell pt-12 md:pt-16">
         <x-frontend.breadcrumbs :items="array_values(array_filter([
-            ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Journal', 'url' => route('blog.index')],
+            ['label' => __('Home'), 'url' => route('home')],
+            ['label' => __('Journal'), 'url' => route('blog.index')],
             $category->parent ? ['label' => $category->parent->name, 'url' => route('categories.show', $category->parent->slug)] : null,
             ['label' => $category->name],
         ]))" />
 
         <header class="mt-8 max-w-3xl">
             <p class="eyebrow eyebrow-accent">
-                {{ $category->parent ? $category->parent->name : 'Section' }}
+                {{ $category->parent ? $category->parent->name : __('Section') }}
             </p>
             <h1 class="mt-3 font-display text-fluid-display text-ink">{{ $category->name }}</h1>
             @if ($category->description)
                 <p class="mt-5 text-lg leading-relaxed text-muted">{{ $category->description }}</p>
             @endif
             <p class="mt-5 text-xs uppercase tracking-[0.16em] text-muted">
-                {{ $articles->total() }} {{ \Illuminate\Support\Str::plural('article', $articles->total()) }}
+                {{ trans_choice(':count article|:count articles', $articles->total(), ['count' => $articles->total()]) }}
             </p>
         </header>
 
@@ -53,9 +53,9 @@
                     {{ $articles->links() }}
                 </div>
             @else
-                <x-frontend.empty-state icon="folder" title="Nothing published in this section yet"
-                    description="There are no articles here at the moment."
-                    :action="route('blog.index')" action-label="Browse the journal" />
+                <x-frontend.empty-state icon="folder" :title="__('Nothing published in this section yet')"
+                    :description="__('There are no articles here at the moment.')"
+                    :action="route('blog.index')" :action-label="__('Browse the journal')" />
             @endif
         </div>
 

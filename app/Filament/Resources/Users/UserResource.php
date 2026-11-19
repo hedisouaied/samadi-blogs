@@ -21,11 +21,13 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = User::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Administration';
+    protected static string|\UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Administration;
 
     protected static ?int $navigationSort = 1;
 

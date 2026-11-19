@@ -19,11 +19,13 @@ use UnitEnum;
 
 class NewsletterSubscriberResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = NewsletterSubscriber::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Community';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Community;
 
     protected static ?int $navigationSort = 2;
 

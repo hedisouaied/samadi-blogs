@@ -9,8 +9,8 @@
 
         <header class="shell">
             <x-frontend.breadcrumbs :items="[
-                ['label' => 'Home', 'url' => route('home')],
-                ['label' => 'Journal', 'url' => route('blog.index')],
+                ['label' => __('Home'), 'url' => route('home')],
+                ['label' => __('Journal'), 'url' => route('blog.index')],
                 ['label' => $article->title],
             ]" />
 
@@ -36,11 +36,11 @@
                     <time datetime="{{ $article->published_at?->toDateString() }}">{{ format_date($article->published_at) }}</time>
                     @if ($article->reading_time_minutes)
                         <span aria-hidden="true">/</span>
-                        <span>{{ $article->reading_time_minutes }} min read</span>
+                        <span>{{ __(':count min read', ['count' => $article->reading_time_minutes]) }}</span>
                     @endif
                     @if ($article->view_count)
                         <span aria-hidden="true">/</span>
-                        <span>{{ number_format($article->view_count) }} views</span>
+                        <span>{{ trans_choice(':count view|:count views', $article->view_count, ['count' => number_format($article->view_count)]) }}</span>
                     @endif
                 </div>
             </div>
@@ -83,7 +83,7 @@
 
                 @if ($article->tags->isNotEmpty())
                     <div class="mt-14 flex flex-wrap items-center gap-2 border-t border-line pt-8">
-                        <span class="eyebrow mr-2">Filed under</span>
+                        <span class="eyebrow me-2">{{ __('Filed under') }}</span>
                         @foreach ($article->tags as $tag)
                             <x-frontend.tag-pill :tag="$tag" />
                         @endforeach
@@ -113,14 +113,14 @@
                             @endif
                             <a href="{{ route('authors.show', $article->author->username ?: $article->author->getKey()) }}"
                                 class="link-underline mt-4 inline-block text-xs font-medium uppercase tracking-[0.12em] text-accent">
-                                All articles
+                                {{ __('All articles') }}
                             </a>
                         </div>
                     @endif
 
                     <div class="rounded-2xl border border-line bg-surface p-5 text-center">
                         <p class="text-3xl font-display text-ink">{{ $article->reading_time_minutes ?: 1 }}</p>
-                        <p class="mt-1 text-[0.6875rem] uppercase tracking-[0.14em] text-muted">minute read</p>
+                        <p class="mt-1 text-[0.6875rem] uppercase tracking-[0.14em] text-muted">{{ __('minute read') }}</p>
                     </div>
                 </div>
             </aside>
@@ -131,7 +131,7 @@
                 @if ($previous)
                     <a href="{{ route('blog.show', $previous->slug) }}" class="group rounded-2xl border border-line p-6 transition-colors hover:border-ink">
                         <span class="eyebrow flex items-center gap-2">
-                            <x-frontend.icon name="arrow-left" class="h-3.5 w-3.5" /> Previous
+                            <x-frontend.icon name="arrow-left" class="h-3.5 w-3.5" /> {{ __('Previous') }}
                         </span>
                         <p class="card-title mt-3 text-lg leading-snug">{{ $previous->title }}</p>
                     </a>
@@ -140,9 +140,9 @@
                 @endif
 
                 @if ($next)
-                    <a href="{{ route('blog.show', $next->slug) }}" class="group rounded-2xl border border-line p-6 text-right transition-colors hover:border-ink">
+                    <a href="{{ route('blog.show', $next->slug) }}" class="group rounded-2xl border border-line p-6 text-end transition-colors hover:border-ink">
                         <span class="eyebrow flex items-center justify-end gap-2">
-                            Next <x-frontend.icon name="arrow-right" class="h-3.5 w-3.5" />
+                            {{ __('Next') }} <x-frontend.icon name="arrow-right" class="h-3.5 w-3.5" />
                         </span>
                         <p class="card-title mt-3 text-lg leading-snug">{{ $next->title }}</p>
                     </a>
@@ -152,7 +152,7 @@
 
         @if ($related->isNotEmpty())
             <section class="shell mt-20">
-                <x-frontend.section-heading eyebrow="Keep reading" title="Related essays" :href="route('blog.index')" />
+                <x-frontend.section-heading :eyebrow="__('Keep reading')" :title="__('Related essays')" :href="route('blog.index')" />
                 <div class="mt-12 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                     @foreach ($related as $item)
                         <x-frontend.article-card :article="$item" variant="standard" :delay="$loop->index * 90" />

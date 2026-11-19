@@ -7,16 +7,16 @@
     <div data-mobile-backdrop class="absolute inset-0 bg-ink/40 opacity-0 backdrop-blur-sm transition-opacity duration-500"></div>
 
     <div data-mobile-panel
-        class="absolute right-0 top-0 flex h-full w-[88%] max-w-sm translate-x-full flex-col border-l border-line bg-surface transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+        class="absolute end-0 top-0 flex h-full w-[88%] max-w-sm translate-x-full flex-col border-s border-line bg-surface transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
 
         <div class="flex items-center justify-between border-b border-line px-6 py-5">
             <span class="font-display text-xl text-ink">{{ $siteName ?? setting('general.site_name') }}</span>
-            <button type="button" data-mobile-close aria-label="Close menu" class="icon-btn">
+            <button type="button" data-mobile-close aria-label="{{ __('Close menu') }}" class="icon-btn">
                 <x-frontend.icon name="close" />
             </button>
         </div>
 
-        <nav aria-label="Mobile" class="flex-1 overflow-y-auto px-6 py-6">
+        <nav aria-label="{{ __('Mobile') }}" class="flex-1 overflow-y-auto px-6 py-6">
             <ul class="space-y-1">
                 @foreach ($navItems as $item)
                     <li>
@@ -27,7 +27,7 @@
                                     {{ $item['label'] }}
                                     <x-frontend.icon name="chevron-down" class="h-5 w-5 text-muted transition-transform group-open:rotate-180" />
                                 </summary>
-                                <ul class="mb-2 ml-1 border-l border-line pl-4">
+                                <ul class="mb-2 ms-1 border-s border-line ps-4">
                                     @foreach ($item['children'] as $child)
                                         <li>
                                             <a href="{{ $child['url'] }}"
@@ -51,8 +51,9 @@
         </nav>
 
         <div class="space-y-3 border-t border-line px-6 py-6">
-            <a href="{{ route('blog.index') }}" class="btn btn-outline w-full">Browse the journal</a>
-            <a href="#newsletter" data-mobile-close class="btn btn-primary w-full">Subscribe</a>
+            <a href="{{ route('blog.index') }}" class="btn btn-outline w-full">{{ __('Browse the journal') }}</a>
+            <a href="#newsletter" data-mobile-close class="btn btn-primary w-full">{{ __('Subscribe') }}</a>
+            @include('frontend.partials.language-switcher', ['class' => 'justify-center pt-3 text-sm text-muted'])
         </div>
     </div>
 </div>

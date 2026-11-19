@@ -24,7 +24,7 @@ class CommentController extends Controller
         $moderation = (string) setting('content.comment_moderation', 'manual');
 
         if (! $article->allow_comments || $moderation === 'disabled') {
-            return $this->fail($request, 'Comments are closed on this article.');
+            return $this->fail($request, __('Comments are closed on this article.'));
         }
 
         if ($request->filled('website')) {
@@ -41,7 +41,7 @@ class CommentController extends Controller
         $key = 'comment:'.$request->ip();
 
         if (RateLimiter::tooManyAttempts($key, 4)) {
-            return $this->fail($request, 'You are commenting too quickly. Please wait a moment.', 429);
+            return $this->fail($request, __('You are commenting too quickly. Please wait a moment.'), 429);
         }
 
         RateLimiter::hit($key, 120);
@@ -76,8 +76,8 @@ class CommentController extends Controller
         }
 
         $message = $autoApprove
-            ? 'Your comment is live.'
-            : 'Thanks! Your comment is awaiting moderation.';
+            ? __('Your comment is live.')
+            : __('Thanks! Your comment is awaiting moderation.');
 
         return $this->succeed($request, $message);
     }

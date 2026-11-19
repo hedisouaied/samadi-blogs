@@ -3,15 +3,15 @@
 @section('content')
     <section class="shell pt-12 md:pt-16">
         <x-frontend.breadcrumbs :items="[
-            ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Journal'],
+            ['label' => __('Home'), 'url' => route('home')],
+            ['label' => __('Journal')],
         ]" />
 
         <header class="mt-8 max-w-3xl">
-            <p class="eyebrow eyebrow-accent">The journal</p>
-            <h1 class="mt-3 font-display text-fluid-display text-ink">Essays &amp; field notes</h1>
+            <p class="eyebrow eyebrow-accent">{{ __('The journal') }}</p>
+            <h1 class="mt-3 font-display text-fluid-display text-ink">{{ __('Essays & field notes') }}</h1>
             <p class="mt-5 text-lg leading-relaxed text-muted">
-                Long-form reporting, ideas and observations — written to be read slowly.
+                {{ __('Long-form reporting, ideas and observations — written to be read slowly.') }}
             </p>
         </header>
     </section>
@@ -29,9 +29,9 @@
                     {{ $articles->links() }}
                 </div>
             @else
-                <x-frontend.empty-state icon="compass" title="The journal is quiet"
-                    description="No articles have been published yet. Check back soon."
-                    :action="route('home')" action-label="Back home" />
+                <x-frontend.empty-state icon="compass" :title="__('The journal is quiet')"
+                    :description="__('No articles have been published yet. Check back soon.')"
+                    :action="route('home')" :action-label="__('Back home')" />
             @endif
         </div>
 

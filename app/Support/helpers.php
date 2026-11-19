@@ -25,6 +25,25 @@ if (! function_exists('format_date')) {
 
         $format ??= (string) setting('general.date_format', 'M j, Y');
 
-        return Carbon::parse($date)->format($format);
+        return Carbon::parse($date)->locale(app()->getLocale())->translatedFormat($format);
+    }
+}
+
+if (! function_exists('supported_locales')) {
+    /**
+     * @return array<string, array{name: string, native: string, dir: string}>
+     */
+    function supported_locales(): array
+    {
+        return config('app.supported_locales', []);
+    }
+}
+
+if (! function_exists('locale_direction')) {
+    function locale_direction(?string $locale = null): string
+    {
+        $locale ??= app()->getLocale();
+
+        return supported_locales()[$locale]['dir'] ?? 'ltr';
     }
 }

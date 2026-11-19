@@ -82,7 +82,7 @@ class ArticlesTable
                     ->label('Published')
                     ->dateTime('M j, Y')
                     ->sortable()
-                    ->placeholder('—'),
+                    ->placeholder(__('—')),
                 TextColumn::make('view_count')
                     ->label('Views')
                     ->numeric()
@@ -140,7 +140,7 @@ class ArticlesTable
                         ->requiresConfirmation()
                         ->action(function (Article $record, ArticleService $service): void {
                             $service->publish($record, Auth::user());
-                            Notification::make()->title('Article published')->success()->send();
+                            Notification::make()->title(__('Article published'))->success()->send();
                         }),
                     Action::make('schedule')
                         ->label('Schedule')
@@ -157,7 +157,7 @@ class ArticlesTable
                         ])
                         ->action(function (Article $record, array $data, ArticleService $service): void {
                             $service->schedule($record, Carbon::parse($data['scheduled_at']), Auth::user());
-                            Notification::make()->title('Article scheduled')->success()->send();
+                            Notification::make()->title(__('Article scheduled'))->success()->send();
                         }),
                     Action::make('submitForReview')
                         ->label('Submit for review')
@@ -165,7 +165,7 @@ class ArticlesTable
                         ->visible(fn (Article $record): bool => in_array($record->status, [ArticleStatus::Draft, ArticleStatus::PendingReview], true))
                         ->action(function (Article $record, ArticleService $service): void {
                             $service->submitForReview($record, Auth::user());
-                            Notification::make()->title('Submitted for review')->success()->send();
+                            Notification::make()->title(__('Submitted for review'))->success()->send();
                         }),
                     Action::make('unpublish')
                         ->label('Unpublish')
@@ -176,7 +176,7 @@ class ArticlesTable
                         ->requiresConfirmation()
                         ->action(function (Article $record, ArticleService $service): void {
                             $service->unpublish($record, Auth::user());
-                            Notification::make()->title('Article moved to draft')->success()->send();
+                            Notification::make()->title(__('Article moved to draft'))->success()->send();
                         }),
                     Action::make('archive')
                         ->label('Archive')
@@ -187,28 +187,28 @@ class ArticlesTable
                         ->requiresConfirmation()
                         ->action(function (Article $record, ArticleService $service): void {
                             $service->archive($record, Auth::user());
-                            Notification::make()->title('Article archived')->success()->send();
+                            Notification::make()->title(__('Article archived'))->success()->send();
                         }),
                     Action::make('toggleFeatured')
                         ->label(fn (Article $record): string => $record->is_featured ? 'Unfeature' : 'Feature')
                         ->icon(Heroicon::OutlinedStar)
                         ->action(function (Article $record, ArticleService $service): void {
                             $service->toggleFeatured($record, Auth::user());
-                            Notification::make()->title('Article updated')->success()->send();
+                            Notification::make()->title(__('Article updated'))->success()->send();
                         }),
                     Action::make('toggleActive')
                         ->label(fn (Article $record): string => $record->is_active ? 'Deactivate' : 'Activate')
                         ->icon(Heroicon::OutlinedPower)
                         ->action(function (Article $record, ArticleService $service): void {
                             $service->toggleActive($record, Auth::user());
-                            Notification::make()->title('Article updated')->success()->send();
+                            Notification::make()->title(__('Article updated'))->success()->send();
                         }),
                     Action::make('duplicate')
                         ->label('Duplicate')
                         ->icon(Heroicon::OutlinedDocumentDuplicate)
                         ->action(function (Article $record, ArticleService $service, $livewire): void {
                             $copy = $service->duplicate($record, Auth::user());
-                            Notification::make()->title('Article duplicated')->success()->send();
+                            Notification::make()->title(__('Article duplicated'))->success()->send();
                             $livewire->redirect(ArticleResource::getUrl('edit', ['record' => $copy]));
                         }),
                     DeleteAction::make()
@@ -239,12 +239,12 @@ class ArticlesTable
                     ForceDeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No articles yet')
-            ->emptyStateDescription('Start writing your first article.')
+            ->emptyStateHeading(__('No articles yet'))
+            ->emptyStateDescription(__('Start writing your first article.'))
             ->emptyStateIcon('heroicon-o-document-text')
             ->emptyStateActions([
                 Action::make('create')
-                    ->label('New article')
+                    ->label(__('New article'))
                     ->icon('heroicon-o-plus')
                     ->url(fn (): string => ArticleResource::getUrl('create')),
             ]);

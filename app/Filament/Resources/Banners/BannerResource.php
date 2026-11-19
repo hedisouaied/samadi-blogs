@@ -21,11 +21,13 @@ use UnitEnum;
 
 class BannerResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = Banner::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Content';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Content;
 
     protected static ?int $navigationSort = 5;
 

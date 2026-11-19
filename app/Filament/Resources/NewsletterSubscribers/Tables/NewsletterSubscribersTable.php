@@ -34,9 +34,9 @@ class NewsletterSubscribersTable
                     ->formatStateUsing(fn (SubscriberStatus $state): string => $state->getLabel())
                     ->color(fn (SubscriberStatus $state): string => $state->getColor())
                     ->icon(fn (SubscriberStatus $state): string => $state->getIcon()),
-                TextColumn::make('source')->label('Source')->badge()->color('gray')->placeholder('—')->toggleable(),
-                TextColumn::make('subscribed_at')->label('Subscribed')->since()->placeholder('—')->sortable(),
-                TextColumn::make('last_email_sent_at')->label('Last email')->since()->placeholder('Never')->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('source')->label('Source')->badge()->color('gray')->placeholder(__('—'))->toggleable(),
+                TextColumn::make('subscribed_at')->label('Subscribed')->since()->placeholder(__('—'))->sortable(),
+                TextColumn::make('last_email_sent_at')->label('Last email')->since()->placeholder(__('Never'))->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')->label('Added')->since()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
@@ -62,7 +62,7 @@ class NewsletterSubscribersTable
                         ->action(function (NewsletterSubscriber $record): void {
                             $record->markSubscribed();
                             $record->save();
-                            Notification::make()->title('Subscriber activated')->success()->send();
+                            Notification::make()->title(__('Subscriber activated'))->success()->send();
                         }),
                     Action::make('unsubscribe')
                         ->label('Unsubscribe')
@@ -74,7 +74,7 @@ class NewsletterSubscribersTable
                         ->action(function (NewsletterSubscriber $record): void {
                             $record->markUnsubscribed();
                             $record->save();
-                            Notification::make()->title('Subscriber unsubscribed')->success()->send();
+                            Notification::make()->title(__('Subscriber unsubscribed'))->success()->send();
                         }),
                     DeleteAction::make(),
                 ]),
@@ -92,14 +92,14 @@ class NewsletterSubscribersTable
                                 $record->markSubscribed();
                                 $record->save();
                             });
-                            Notification::make()->title('Subscribers activated')->success()->send();
+                            Notification::make()->title(__('Subscribers activated'))->success()->send();
                         })
                         ->deselectRecordsAfterCompletion(),
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No subscribers yet')
-            ->emptyStateDescription('Newsletter sign-ups from the public site appear here.')
+            ->emptyStateHeading(__('No subscribers yet'))
+            ->emptyStateDescription(__('Newsletter sign-ups from the public site appear here.'))
             ->emptyStateIcon('heroicon-o-envelope');
     }
 }

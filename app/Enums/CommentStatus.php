@@ -17,11 +17,11 @@ enum CommentStatus: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::Approved => 'Approved',
-            self::Rejected => 'Rejected',
-            self::Spam => 'Spam',
-            self::Trash => 'Trash',
+            self::Pending => __('Pending'),
+            self::Approved => __('Approved'),
+            self::Rejected => __('Rejected'),
+            self::Spam => __('Spam'),
+            self::Trash => __('Trash'),
         };
     }
 

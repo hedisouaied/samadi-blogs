@@ -33,11 +33,11 @@ class ViewComment extends ViewRecord
                     $ok = app(CommentService::class)->approve($this->getRecord(), Auth::user());
 
                     if ($ok) {
-                        Notification::make()->title('Comment approved')->success()->send();
+                        Notification::make()->title(__('Comment approved'))->success()->send();
                     } else {
                         Notification::make()
-                            ->title('Cannot approve yet')
-                            ->body('Approve the parent comment first.')
+                            ->title(__('Cannot approve yet'))
+                            ->body(__('Approve the parent comment first.'))
                             ->warning()
                             ->send();
                     }
@@ -49,7 +49,7 @@ class ViewComment extends ViewRecord
                 ->color('danger')
                 ->action(function (): void {
                     app(CommentService::class)->reject($this->getRecord(), Auth::user());
-                    Notification::make()->title('Comment rejected')->success()->send();
+                    Notification::make()->title(__('Comment rejected'))->success()->send();
                 });
         }
 
@@ -59,10 +59,10 @@ class ViewComment extends ViewRecord
                 ->icon('heroicon-o-trash')
                 ->color('danger')
                 ->requiresConfirmation()
-                ->modalDescription('Replies are preserved and re-attached to this comment\'s parent.')
+                ->modalDescription(__('Replies are preserved and re-attached to this comment\'s parent.'))
                 ->action(function (): void {
                     app(CommentService::class)->deletePreservingReplies($this->getRecord(), Auth::user());
-                    Notification::make()->title('Comment deleted')->success()->send();
+                    Notification::make()->title(__('Comment deleted'))->success()->send();
 
                     $this->redirect(CommentResource::getUrl('index'));
                 });

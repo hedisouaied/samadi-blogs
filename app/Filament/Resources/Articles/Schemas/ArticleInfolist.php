@@ -37,17 +37,17 @@ class ArticleInfolist
                                             ->color(fn (ArticleStatus $state): string => $state->getColor())
                                             ->icon(fn (ArticleStatus $state): string => $state->getIcon()),
                                         TextEntry::make('author.name')->label('Author'),
-                                        TextEntry::make('published_at')->label('Published')->dateTime('M j, Y H:i')->placeholder('Not published'),
+                                        TextEntry::make('published_at')->label('Published')->dateTime('M j, Y H:i')->placeholder(__('Not published')),
                                         TextEntry::make('slug')->label('Slug')->copyable()->prefix('/blog/'),
-                                        TextEntry::make('reading_time_minutes')->label('Reading time')->suffix(' min')->badge()->color('gray'),
+                                        TextEntry::make('reading_time_minutes')->label('Reading time')->suffix(__(' min'))->badge()->color('gray'),
                                         TextEntry::make('view_count')->label('Views')->numeric()->badge()->color('info'),
-                                        TextEntry::make('excerpt')->columnSpanFull()->placeholder('No excerpt.'),
+                                        TextEntry::make('excerpt')->columnSpanFull()->placeholder(__('No excerpt.')),
                                     ]),
-                                Section::make('Classification')
+                                Section::make(__('Classification'))
                                     ->columns(2)
                                     ->schema([
-                                        TextEntry::make('categories.name')->label('Categories')->badge()->color('primary')->placeholder('Uncategorised'),
-                                        TextEntry::make('tags.name')->label('Tags')->badge()->color('info')->placeholder('No tags'),
+                                        TextEntry::make('categories.name')->label('Categories')->badge()->color('primary')->placeholder(__('Uncategorised')),
+                                        TextEntry::make('tags.name')->label('Tags')->badge()->color('info')->placeholder(__('No tags')),
                                     ]),
                             ]),
                         Tabs\Tab::make('Content')
@@ -63,8 +63,8 @@ class ArticleInfolist
                                     ->columns(2)
                                     ->schema([
                                         TextEntry::make('seo_title_display')->label('SEO title'),
-                                        TextEntry::make('seo_description')->placeholder('—'),
-                                        TextEntry::make('canonical_url')->placeholder('—')->copyable(),
+                                        TextEntry::make('seo_description')->placeholder(__('—')),
+                                        TextEntry::make('canonical_url')->placeholder(__('—'))->copyable(),
                                         IconEntry::make('seo_noindex')->label('No-index')->boolean(),
                                     ]),
                             ]),
@@ -75,7 +75,7 @@ class ArticleInfolist
                                     ->schema([
                                         TextEntry::make('created_at')->label('Created')->dateTime('M j, Y H:i'),
                                         TextEntry::make('updated_at')->label('Updated')->since(),
-                                        TextEntry::make('deleted_at')->label('Deleted')->since()->placeholder('—'),
+                                        TextEntry::make('deleted_at')->label('Deleted')->since()->placeholder(__('—')),
                                         IconEntry::make('is_featured')->label('Featured')->boolean(),
                                         IconEntry::make('is_active')->label('Active')->boolean(),
                                         IconEntry::make('allow_comments')->label('Comments enabled')->boolean(),

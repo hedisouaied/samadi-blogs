@@ -16,10 +16,10 @@ enum BannerStatus: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::Draft => 'Draft',
-            self::Scheduled => 'Scheduled',
-            self::Published => 'Published',
-            self::Archived => 'Archived',
+            self::Draft => __('Draft'),
+            self::Scheduled => __('Scheduled'),
+            self::Published => __('Published'),
+            self::Archived => __('Archived'),
         };
     }
 

@@ -17,11 +17,11 @@ enum BannerPlacement: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::HomepageHero => 'Homepage Hero',
-            self::HomepageMiddle => 'Homepage Middle',
-            self::Sidebar => 'Sidebar',
-            self::ArticleInline => 'Article Inline',
-            self::Footer => 'Footer',
+            self::HomepageHero => __('Homepage Hero'),
+            self::HomepageMiddle => __('Homepage Middle'),
+            self::Sidebar => __('Sidebar'),
+            self::ArticleInline => __('Article Inline'),
+            self::Footer => __('Footer'),
         };
     }
 

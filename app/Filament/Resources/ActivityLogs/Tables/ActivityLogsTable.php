@@ -33,14 +33,14 @@ class ActivityLogsTable
                     ->color('info'),
                 TextColumn::make('user.name')
                     ->label('User')
-                    ->placeholder('System')
+                    ->placeholder(__('System'))
                     ->searchable(['users.name']),
                 TextColumn::make('description')
                     ->limit(60)
                     ->wrap(),
                 TextColumn::make('subject_type')
                     ->label('Subject type')
-                    ->formatStateUsing(fn (?string $state): string => $state ? class_basename($state) : '—')
+                    ->formatStateUsing(fn (?string $state): string => $state ? class_basename($state) : __('—'))
                     ->badge()
                     ->color('gray')
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -93,8 +93,8 @@ class ActivityLogsTable
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::DeleteActivity) ?? false),
                 ]),
             ])
-            ->emptyStateHeading('No activity yet')
-            ->emptyStateDescription('Administrative events are recorded here.')
+            ->emptyStateHeading(__('No activity yet'))
+            ->emptyStateDescription(__('Administrative events are recorded here.'))
             ->emptyStateIcon('heroicon-o-chart-bar-square');
     }
 }

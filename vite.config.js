@@ -24,6 +24,16 @@ export default defineConfig({
                     weights: [400, 500, 600],
                     styles: ['normal', 'italic'],
                 }),
+                bunny('Noto Naskh Arabic', {
+                    alias: 'arabic-reading',
+                    weights: [400, 500, 600, 700],
+                    styles: ['normal'],
+                }),
+                bunny('IBM Plex Sans Arabic', {
+                    alias: 'arabic-interface',
+                    weights: [400, 500, 600],
+                    styles: ['normal'],
+                }),
                 bunny('JetBrains Mono', {
                     alias: 'code',
                     weights: [400, 500],

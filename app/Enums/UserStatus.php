@@ -15,9 +15,9 @@ enum UserStatus: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::Active => 'Active',
-            self::Inactive => 'Inactive',
-            self::Suspended => 'Suspended',
+            self::Active => __('Active'),
+            self::Inactive => __('Inactive'),
+            self::Suspended => __('Suspended'),
         };
     }
 

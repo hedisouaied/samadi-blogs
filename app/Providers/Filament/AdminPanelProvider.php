@@ -2,16 +2,18 @@
 
 namespace App\Providers\Filament;
 
+use App\Http\Middleware\SetLocale;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\NavigationGroup;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Width;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -39,14 +41,14 @@ class AdminPanelProvider extends PanelProvider
             ->darkMode(true)
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth(Width::SevenExtraLarge)
-            ->navigationGroups([
-                NavigationGroup::make('Content')
-                    ->icon('heroicon-o-document-duplicate'),
-                NavigationGroup::make('Community')
-                    ->icon('heroicon-o-users'),
-                NavigationGroup::make('Administration')
-                    ->icon('heroicon-o-cog-6-tooth'),
-            ])
+            ->renderHook(
+                PanelsRenderHook::USER_MENU_BEFORE,
+                fn (): View => view('filament.locale-switcher'),
+            )
+            ->renderHook(
+                PanelsRenderHook::SIMPLE_PAGE_END,
+                fn (): View => view('filament.locale-switcher-inline'),
+            )
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -58,6 +60,7 @@ class AdminPanelProvider extends PanelProvider
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
+                SetLocale::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
                 PreventRequestForgery::class,

@@ -1,20 +1,20 @@
 @if ($paginator->hasPages())
-    <nav role="navigation" aria-label="Pagination"
+    <nav role="navigation" aria-label="{{ __('Pagination') }}"
         class="flex flex-col items-center justify-between gap-6 border-t border-line pt-8 sm:flex-row">
 
         <div class="order-2 sm:order-1">
             @if ($paginator->onFirstPage())
                 <span class="btn btn-outline pointer-events-none opacity-40">
-                    <x-frontend.icon name="arrow-left" class="h-4 w-4" /> Newer
+                    <x-frontend.icon name="arrow-left" class="h-4 w-4" /> {{ __('Newer') }}
                 </span>
             @else
                 <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="btn btn-outline">
-                    <x-frontend.icon name="arrow-left" class="h-4 w-4" /> Newer
+                    <x-frontend.icon name="arrow-left" class="h-4 w-4" /> {{ __('Newer') }}
                 </a>
             @endif
         </div>
 
-        <nav class="hidden items-center gap-1 md:flex" aria-label="Page numbers">
+        <div class="hidden items-center gap-1 md:flex" aria-label="{{ __('Page numbers') }}">
             @isset($elements)
                 @foreach ($elements as $element)
                     @if (is_string($element))
@@ -35,17 +35,17 @@
         </div>
 
         <p class="order-2 text-xs uppercase tracking-[0.16em] text-muted md:hidden">
-            Page {{ $paginator->currentPage() }} of {{ $paginator->lastPage() }}
+            {{ __('Page :current of :last', ['current' => $paginator->currentPage(), 'last' => $paginator->lastPage()]) }}
         </p>
 
         <div class="order-3">
             @if ($paginator->hasMorePages())
                 <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="btn btn-ink">
-                    Older <x-frontend.icon name="arrow-right" class="h-4 w-4" />
+                    {{ __('Older') }} <x-frontend.icon name="arrow-right" class="h-4 w-4" />
                 </a>
             @else
                 <span class="btn btn-outline opacity-50">
-                    Older <x-frontend.icon name="arrow-right" class="h-4 w-4" />
+                    {{ __('Older') }} <x-frontend.icon name="arrow-right" class="h-4 w-4" />
                 </span>
             @endif
         </div>

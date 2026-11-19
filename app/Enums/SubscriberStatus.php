@@ -17,11 +17,11 @@ enum SubscriberStatus: string implements HasColor, HasIcon, HasLabel
     public function getLabel(): string
     {
         return match ($this) {
-            self::Pending => 'Pending',
-            self::Subscribed => 'Subscribed',
-            self::Unsubscribed => 'Unsubscribed',
-            self::Bounced => 'Bounced',
-            self::Suppressed => 'Suppressed',
+            self::Pending => __('Pending'),
+            self::Subscribed => __('Subscribed'),
+            self::Unsubscribed => __('Unsubscribed'),
+            self::Bounced => __('Bounced'),
+            self::Suppressed => __('Suppressed'),
         };
     }
 

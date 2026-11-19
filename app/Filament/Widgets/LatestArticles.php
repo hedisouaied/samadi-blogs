@@ -14,9 +14,12 @@ use Filament\Widgets\TableWidget;
 
 class LatestArticles extends TableWidget
 {
-    protected static ?string $heading = 'Latest articles';
-
     protected static ?int $sort = 3;
+
+    protected function getTableHeading(): string
+    {
+        return __('Latest articles');
+    }
 
     protected int|string|array $columnSpan = 1;
 

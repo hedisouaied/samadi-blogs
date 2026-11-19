@@ -36,10 +36,10 @@ class MediaTable
                     ->searchable(['display_name', 'original_filename'])
                     ->weight('semibold')
                     ->description(fn (Media $record): string => $record->original_filename ?: basename((string) $record->path)),
-                TextColumn::make('collection')->badge()->color('gray')->placeholder('—')->toggleable(),
+                TextColumn::make('collection')->badge()->color('gray')->placeholder(__('—'))->toggleable(),
                 TextColumn::make('mime_type')->label('Type')->badge()->color('info')->toggleable(),
                 TextColumn::make('human_size')->label('Size')->toggleable(),
-                TextColumn::make('dimensions')->label('Dimensions')->placeholder('—')->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('dimensions')->label('Dimensions')->placeholder(__('—'))->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('uploader.name')->label('Uploaded by')->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')->label('Uploaded')->since()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -76,7 +76,7 @@ class MediaTable
                         ->visible(fn (Media $record): bool => filled($record->url))
                         ->action(function (Media $record): void {
                             Notification::make()
-                                ->title('URL ready to copy')
+                                ->title(__('URL ready to copy'))
                                 ->body($record->url)
                                 ->success()
                                 ->send();
@@ -85,7 +85,7 @@ class MediaTable
                         ->action(function (Media $record): void {
                             app(MediaService::class)->deleteFile($record);
                             $record->delete();
-                            Notification::make()->title('Media deleted')->success()->send();
+                            Notification::make()->title(__('Media deleted'))->success()->send();
                         }),
                 ]),
             ])
@@ -96,20 +96,20 @@ class MediaTable
                         ->icon('heroicon-o-trash')
                         ->color('danger')
                         ->requiresConfirmation()
-                        ->modalDescription('The selected records and their underlying files will be permanently removed.')
+                        ->modalDescription(__('The selected records and their underlying files will be permanently removed.'))
                         ->action(function (Collection $records): void {
                             $service = app(MediaService::class);
                             $records->each(function (Media $media) use ($service): void {
                                 $service->deleteFile($media);
                                 $media->delete();
                             });
-                            Notification::make()->title('Media deleted')->success()->send();
+                            Notification::make()->title(__('Media deleted'))->success()->send();
                         })
                         ->deselectRecordsAfterCompletion(),
                 ]),
             ])
-            ->emptyStateHeading('Media library is empty')
-            ->emptyStateDescription('Upload images and documents to reuse across your content.')
+            ->emptyStateHeading(__('Media library is empty'))
+            ->emptyStateDescription(__('Upload images and documents to reuse across your content.'))
             ->emptyStateIcon('heroicon-o-photo');
     }
 }

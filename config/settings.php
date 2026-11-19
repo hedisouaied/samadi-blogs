@@ -26,7 +26,7 @@ return [
             'site_description' => ['label' => 'Site description', 'type' => 'text', 'default' => 'A modern publication sharing practical articles and thoughtful analysis.', 'max' => 500],
             'contact_email' => ['label' => 'Contact email', 'type' => 'string', 'default' => 'hello@example.com', 'email' => true],
             'timezone' => ['label' => 'Timezone', 'type' => 'string', 'default' => 'UTC', 'helper' => 'PHP timezone identifier, e.g. UTC, Europe/Paris.'],
-            'default_language' => ['label' => 'Default language', 'type' => 'string', 'default' => 'en', 'max' => 8],
+            'default_language' => ['label' => 'Default language', 'type' => 'select', 'default' => 'en', 'options' => ['en' => 'English', 'fr' => 'Français', 'ar' => 'العربية'], 'helper' => 'Language used for visitors who have not picked one yet.'],
             'date_format' => ['label' => 'Date format', 'type' => 'string', 'default' => 'M j, Y', 'helper' => 'Carbon/PHP date format used across the panel.'],
             'pagination_size' => ['label' => 'Default pagination size', 'type' => 'integer', 'default' => 15, 'min' => 5, 'max' => 100],
             'logo_path' => ['label' => 'Logo', 'type' => 'image', 'default' => null],

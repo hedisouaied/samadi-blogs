@@ -26,8 +26,8 @@ class BlogController extends Controller
             'tags' => $this->content->tags(18),
             'middleBanner' => $this->content->banners(BannerPlacement::Sidebar, 1)->first(),
             'seo' => Seo::make([
-                'title' => 'Journal',
-                'description' => 'Essays, field notes and long-form reporting from the '.setting('general.site_name', config('app.name')).' desk.',
+                'title' => __('Journal'),
+                'description' => __('Essays, field notes and long-form reporting from the :site desk.', ['site' => setting('general.site_name', config('app.name'))]),
                 'canonical' => route('blog.index'),
                 'schema' => [
                     $this->collectionSchema($articles->total()),
@@ -123,7 +123,7 @@ class BlogController extends Controller
             '@context' => 'https://schema.org',
             '@type' => 'BreadcrumbList',
             'itemListElement' => [
-                ['@type' => 'ListItem', 'position' => 1, 'name' => 'Journal', 'item' => route('blog.index')],
+                ['@type' => 'ListItem', 'position' => 1, 'name' => __('Journal'), 'item' => route('blog.index')],
                 ['@type' => 'ListItem', 'position' => 2, 'name' => $article->title, 'item' => route('blog.show', $article->slug)],
             ],
         ];
@@ -137,9 +137,9 @@ class BlogController extends Controller
         return array_filter([
             '@context' => 'https://schema.org',
             '@type' => 'CollectionPage',
-            'name' => 'Journal',
+            'name' => __('Journal'),
             'url' => route('blog.index'),
-            'description' => 'Essays, field notes and long-form reporting from the '.setting('general.site_name', config('app.name')).' desk.',
+            'description' => __('Essays, field notes and long-form reporting from the :site desk.', ['site' => setting('general.site_name', config('app.name'))]),
         ]);
     }
 }

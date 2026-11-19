@@ -53,18 +53,18 @@ function initNewsletter() {
 
             const original = label?.textContent;
             if (label) {
-                label.textContent = 'Sending…';
+                label.textContent = window.i18n?.sending ?? 'Sending…';
             }
 
             try {
                 const { ok, payload } = await post(form);
-                setMessage(message, payload.message || (ok ? 'Subscribed.' : 'Something went wrong.'), ok);
+                setMessage(message, payload.message || (ok ? (window.i18n?.subscribed ?? 'Subscribed.') : (window.i18n?.error ?? 'Something went wrong.')), ok);
 
                 if (ok) {
                     form.reset();
                 }
             } catch (error) {
-                setMessage(message, 'Network error. Please try again.', false);
+                setMessage(message, window.i18n?.network ?? 'Network error. Please try again.', false);
             } finally {
                 if (label && original) {
                     label.textContent = original;
@@ -99,18 +99,18 @@ function initComments() {
 
             const original = label?.textContent;
             if (label) {
-                label.textContent = 'Posting…';
+                label.textContent = window.i18n?.posting ?? 'Posting…';
             }
 
             try {
                 const { ok, payload } = await post(form);
-                setMessage(message, payload.message || (ok ? 'Thanks!' : 'Could not post your comment.'), ok);
+                setMessage(message, payload.message || (ok ? (window.i18n?.thanks ?? 'Thanks!') : (window.i18n?.commentFailed ?? 'Could not post your comment.')), ok);
 
                 if (ok) {
                     form.reset();
                 }
             } catch (error) {
-                setMessage(message, 'Network error. Please try again.', false);
+                setMessage(message, window.i18n?.network ?? 'Network error. Please try again.', false);
             } finally {
                 if (label && original) {
                     label.textContent = original;

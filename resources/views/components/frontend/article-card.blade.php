@@ -43,7 +43,7 @@
                 <div class="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[0.75rem] tracking-wide text-white/80">
                     @if ($article->author)<span>{{ $article->author->name }}</span><span aria-hidden="true">&middot;</span>@endif
                     <time datetime="{{ $article->published_at?->toDateString() }}">{{ format_date($article->published_at) }}</time>
-                    @if ($article->reading_time_minutes)<span aria-hidden="true">&middot;</span><span>{{ $article->reading_time_minutes }} min read</span>@endif
+                    @if ($article->reading_time_minutes)<span aria-hidden="true">&middot;</span><span>{{ __(':count min read', ['count' => $article->reading_time_minutes]) }}</span>@endif
                 </div>
             </div>
         </a>
@@ -87,7 +87,7 @@
                 <p class="mt-3 line-clamp-2 text-sm leading-relaxed text-muted">{{ $excerpt }}</p>
                 <div class="mt-4 flex flex-wrap items-center gap-x-2.5 text-[0.75rem] text-muted">
                     <time datetime="{{ $article->published_at?->toDateString() }}">{{ format_date($article->published_at) }}</time>
-                    @if ($article->reading_time_minutes)<span aria-hidden="true">&middot;</span><span>{{ $article->reading_time_minutes }} min read</span>@endif
+                    @if ($article->reading_time_minutes)<span aria-hidden="true">&middot;</span><span>{{ __(':count min read', ['count' => $article->reading_time_minutes]) }}</span>@endif
                 </div>
             </div>
         </a>
@@ -108,7 +108,7 @@
                 <p class="mt-2 hidden line-clamp-2 text-sm leading-relaxed text-muted sm:block">{{ $excerpt }}</p>
                 <div class="mt-3 flex flex-wrap items-center gap-x-2.5 text-[0.75rem] text-muted">
                     <time datetime="{{ $article->published_at?->toDateString() }}">{{ format_date($article->published_at) }}</time>
-                    @if ($article->reading_time_minutes)<span aria-hidden="true">&middot;</span><span>{{ $article->reading_time_minutes }} min</span>@endif
+                    @if ($article->reading_time_minutes)<span aria-hidden="true">&middot;</span><span>{{ __(':count min', ['count' => $article->reading_time_minutes]) }}</span>@endif
                 </div>
             </div>
         </a>
@@ -141,7 +141,7 @@
                 <h3 class="card-title text-lg leading-snug">{{ $article->title }}</h3>
                 <p class="mt-1.5 text-[0.6875rem] uppercase tracking-[0.12em] text-muted">
                     {{ format_date($article->published_at) }}
-                    @if ($article->reading_time_minutes) &middot; {{ $article->reading_time_minutes }} min @endif
+                    @if ($article->reading_time_minutes) &middot; {{ __(':count min', ['count' => $article->reading_time_minutes]) }} @endif
                 </p>
             </div>
         </a>
@@ -163,7 +163,7 @@
                 <h3 class="card-title mt-2.5 text-xl leading-snug">{{ $article->title }}</h3>
                 <div class="mt-3 flex flex-wrap items-center gap-x-2.5 text-[0.75rem] text-muted">
                     <time datetime="{{ $article->published_at?->toDateString() }}">{{ format_date($article->published_at) }}</time>
-                    @if ($article->reading_time_minutes)<span aria-hidden="true">&middot;</span><span>{{ $article->reading_time_minutes }} min read</span>@endif
+                    @if ($article->reading_time_minutes)<span aria-hidden="true">&middot;</span><span>{{ __(':count min read', ['count' => $article->reading_time_minutes]) }}</span>@endif
                 </div>
             </div>
         </a>

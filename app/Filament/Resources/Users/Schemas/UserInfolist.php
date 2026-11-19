@@ -16,7 +16,7 @@ class UserInfolist
     {
         return $schema
             ->components([
-                Section::make('Profile')
+                Section::make(__('Profile'))
                     ->columns(3)
                     ->components([
                         ImageEntry::make('avatar_path')
@@ -29,9 +29,9 @@ class UserInfolist
                             ->columnSpan(2)
                             ->components([
                                 TextEntry::make('name')->weight('bold')->size('lg'),
-                                TextEntry::make('username')->placeholder('—'),
+                                TextEntry::make('username')->placeholder(__('—')),
                                 TextEntry::make('email')->icon('heroicon-o-envelope')->copyable(),
-                                TextEntry::make('job_title')->placeholder('—'),
+                                TextEntry::make('job_title')->placeholder(__('—')),
                                 TextEntry::make('role')
                                     ->badge()
                                     ->formatStateUsing(fn (UserRole $state): string => $state->getLabel())
@@ -43,15 +43,15 @@ class UserInfolist
                                 TextEntry::make('last_login_at')
                                     ->label('Last login')
                                     ->since()
-                                    ->placeholder('Never'),
+                                    ->placeholder(__('Never')),
                                 TextEntry::make('created_at')->label('Joined')->dateTime('M j, Y'),
                             ]),
                         TextEntry::make('bio')
                             ->columnSpanFull()
-                            ->placeholder('No biography provided.'),
+                            ->placeholder(__('No biography provided.')),
                     ]),
 
-                Section::make('Contribution')
+                Section::make(__('Contribution'))
                     ->columns(4)
                     ->components([
                         TextEntry::make('articles_count')
@@ -66,7 +66,7 @@ class UserInfolist
                             ->numeric()
                             ->badge()
                             ->color('info'),
-                        TextEntry::make('email_verified_at')->label('Email verified')->dateTime('M j, Y')->placeholder('Not verified'),
+                        TextEntry::make('email_verified_at')->label('Email verified')->dateTime('M j, Y')->placeholder(__('Not verified')),
                         TextEntry::make('updated_at')->label('Last updated')->since(),
                     ]),
             ]);

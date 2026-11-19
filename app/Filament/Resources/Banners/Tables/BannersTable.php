@@ -55,15 +55,15 @@ class BannersTable
                 TextColumn::make('schedule')
                     ->label('Window')
                     ->state(fn (Banner $record): string => match (true) {
-                        $record->starts_at && $record->ends_at => $record->starts_at->format('M j').' – '.$record->ends_at->format('M j, Y'),
-                        $record->starts_at => 'From '.$record->starts_at->format('M j, Y'),
-                        $record->ends_at => 'Until '.$record->ends_at->format('M j, Y'),
-                        default => 'Always',
+                        $record->starts_at && $record->ends_at => $record->starts_at->translatedFormat('M j').' – '.$record->ends_at->translatedFormat('M j, Y'),
+                        $record->starts_at => __('From :date', ['date' => $record->starts_at->translatedFormat('M j, Y')]),
+                        $record->ends_at => __('Until :date', ['date' => $record->ends_at->translatedFormat('M j, Y')]),
+                        default => __('Always'),
                     })
                     ->toggleable(),
                 TextColumn::make('displayable')
                     ->label('Live?')
-                    ->state(fn (Banner $record): string => $record->isDisplayable() ? 'Yes' : 'No')
+                    ->state(fn (Banner $record): string => $record->isDisplayable() ? __('Yes') : __('No'))
                     ->badge()
                     ->color(fn (Banner $record): string => $record->isDisplayable() ? 'success' : 'gray'),
                 TextColumn::make('sort_order')->label('Order')->badge()->color('gray')->sortable(),
@@ -86,7 +86,7 @@ class BannersTable
                             && (Auth::user()?->hasPermission(Permission::UpdateBanners) ?? false))
                         ->action(function (Banner $record): void {
                             $record->update(['status' => BannerStatus::Published, 'is_active' => true]);
-                            Notification::make()->title('Banner published')->success()->send();
+                            Notification::make()->title(__('Banner published'))->success()->send();
                         }),
                     Action::make('archive')
                         ->label('Archive')
@@ -96,7 +96,7 @@ class BannersTable
                         ->requiresConfirmation()
                         ->action(function (Banner $record): void {
                             $record->update(['status' => BannerStatus::Archived]);
-                            Notification::make()->title('Banner archived')->success()->send();
+                            Notification::make()->title(__('Banner archived'))->success()->send();
                         }),
                     DeleteAction::make(),
                 ]),
@@ -107,8 +107,8 @@ class BannersTable
                     RestoreBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No banners yet')
-            ->emptyStateDescription('Promotional banners appear across the public site.')
+            ->emptyStateHeading(__('No banners yet'))
+            ->emptyStateDescription(__('Promotional banners appear across the public site.'))
             ->emptyStateIcon('heroicon-o-photo');
     }
 }

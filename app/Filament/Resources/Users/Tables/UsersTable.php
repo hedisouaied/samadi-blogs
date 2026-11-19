@@ -46,12 +46,12 @@ class UsersTable
                 TextColumn::make('username')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->placeholder('—'),
+                    ->placeholder(__('—')),
                 TextColumn::make('job_title')
                     ->label('Job title')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true)
-                    ->placeholder('—'),
+                    ->placeholder(__('—')),
                 TextColumn::make('role')
                     ->badge()
                     ->formatStateUsing(fn (UserRole $state): string => $state->getLabel())
@@ -77,7 +77,7 @@ class UsersTable
                     ->label('Last login')
                     ->since()
                     ->sortable()
-                    ->placeholder('Never')
+                    ->placeholder(__('Never'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Joined')
@@ -106,7 +106,7 @@ class UsersTable
                         ->requiresConfirmation()
                         ->action(function (User $record): void {
                             $record->update(['status' => UserStatus::Active]);
-                            Notification::make()->title('User activated')->success()->send();
+                            Notification::make()->title(__('User activated'))->success()->send();
                         }),
                     Action::make('deactivate')
                         ->label('Deactivate')
@@ -116,7 +116,7 @@ class UsersTable
                         ->requiresConfirmation()
                         ->action(function (User $record): void {
                             $record->update(['status' => UserStatus::Inactive]);
-                            Notification::make()->title('User deactivated')->success()->send();
+                            Notification::make()->title(__('User deactivated'))->success()->send();
                         }),
                     DeleteAction::make(),
                 ]),
@@ -142,8 +142,8 @@ class UsersTable
                     ForceDeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No users yet')
-            ->emptyStateDescription('Create the first administrator or author account.')
+            ->emptyStateHeading(__('No users yet'))
+            ->emptyStateDescription(__('Create the first administrator or author account.'))
             ->emptyStateIcon('heroicon-o-users');
     }
 }

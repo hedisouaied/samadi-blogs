@@ -49,7 +49,7 @@ class CategoryController extends Controller
     protected function breadcrumbs($category): array
     {
         $items = [
-            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Journal', 'item' => route('blog.index')],
+            ['@type' => 'ListItem', 'position' => 1, 'name' => __('Journal'), 'item' => route('blog.index')],
         ];
 
         $position = 2;

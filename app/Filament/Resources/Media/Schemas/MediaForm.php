@@ -14,7 +14,7 @@ class MediaForm
     {
         return $schema
             ->components([
-                Section::make('File')
+                Section::make(__('File'))
                     ->columns(2)
                     ->components([
                         FileUpload::make('path')
@@ -30,11 +30,11 @@ class MediaForm
                         TextInput::make('display_name')
                             ->label('Display name')
                             ->maxLength(180)
-                            ->helperText('A friendly name for the media library.'),
+                            ->helperText(__('A friendly name for the media library.')),
                         TextInput::make('collection')
                             ->maxLength(80)
-                            ->placeholder('e.g. articles, banners, avatars')
-                            ->helperText('Group related assets together.'),
+                            ->placeholder(__('e.g. articles, banners, avatars'))
+                            ->helperText(__('Group related assets together.')),
                         Textarea::make('alt_text')
                             ->label('Alt text')
                             ->rows(2)
@@ -46,7 +46,7 @@ class MediaForm
                             ->columnSpanFull(),
                     ]),
 
-                Section::make('Technical metadata')
+                Section::make(__('Technical metadata'))
                     ->columns(3)
                     ->visible(fn ($record): bool => $record?->exists ?? false)
                     ->components([

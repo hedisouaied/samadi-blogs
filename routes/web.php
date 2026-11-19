@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\Frontend\SitemapController;
 use App\Http\Controllers\Frontend\TagController;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,10 @@ Route::get('/tags/{slug}', TagController::class)->name('tags.show');
 Route::get('/authors/{key}', AuthorController::class)->name('authors.show');
 
 Route::get('/search', SearchController::class)->name('search');
+
+Route::get('/locale/{locale}', LocaleController::class)
+    ->where('locale', '[a-z]{2}')
+    ->name('locale.switch');
 
 Route::post('/newsletter/subscribe', [\App\Http\Controllers\Frontend\NewsletterController::class, 'subscribe'])
     ->middleware('throttle:15,1')

@@ -23,17 +23,17 @@ class ListArticles extends ListRecords
     public function getTabs(): array
     {
         return [
-            'all' => Tab::make('All'),
-            'published' => Tab::make('Published')
+            'all' => Tab::make(__('All')),
+            'published' => Tab::make(__('Published'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', ArticleStatus::Published->value))
                 ->badge(fn (): int => ArticleResource::getModel()::query()->where('status', ArticleStatus::Published->value)->count()),
-            'pending_review' => Tab::make('Pending review')
+            'pending_review' => Tab::make(__('Pending review'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', ArticleStatus::PendingReview->value)),
-            'draft' => Tab::make('Drafts')
+            'draft' => Tab::make(__('Drafts'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', ArticleStatus::Draft->value)),
-            'scheduled' => Tab::make('Scheduled')
+            'scheduled' => Tab::make(__('Scheduled'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', ArticleStatus::Scheduled->value)),
-            'archived' => Tab::make('Archived')
+            'archived' => Tab::make(__('Archived'))
                 ->modifyQueryUsing(fn (Builder $query) => $query->where('status', ArticleStatus::Archived->value)),
         ];
     }

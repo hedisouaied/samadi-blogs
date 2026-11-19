@@ -9,9 +9,12 @@ use Filament\Widgets\ChartWidget;
 
 class ArticlesChart extends ChartWidget
 {
-    protected ?string $heading = 'Articles created (last 12 months)';
-
     protected static ?int $sort = 2;
+
+    public function getHeading(): string
+    {
+        return __('Articles created (last 12 months)');
+    }
 
     protected int|string|array $columnSpan = 2;
 
@@ -35,14 +38,14 @@ class ArticlesChart extends ChartWidget
 
         for ($i = 11; $i >= 0; $i--) {
             $date = now()->subMonths($i);
-            $labels[] = $date->format('M Y');
+            $labels[] = $date->translatedFormat('M Y');
             $values[] = (int) ($rows[$date->format('Y-m')] ?? 0);
         }
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Articles',
+                    'label' => __('Articles'),
                     'data' => $values,
                     'borderColor' => '#6366f1',
                     'backgroundColor' => 'rgba(99, 102, 241, 0.15)',

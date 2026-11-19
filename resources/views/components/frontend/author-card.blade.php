@@ -31,7 +31,7 @@
             <p class="mx-auto mt-2 max-w-xs line-clamp-2 text-sm leading-relaxed text-muted">{{ $author->bio }}</p>
         @endif
         @if ($count)
-            <p class="mt-3 text-[0.6875rem] uppercase tracking-[0.14em] text-muted">{{ $count }} {{ \Illuminate\Support\Str::plural('essay', $count) }}</p>
+            <p class="mt-3 text-[0.6875rem] uppercase tracking-[0.14em] text-muted">{{ trans_choice(':count essay|:count essays', $count, ['count' => $count]) }}</p>
         @endif
     </a>
 @endif

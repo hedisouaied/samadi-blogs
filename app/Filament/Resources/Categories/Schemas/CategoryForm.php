@@ -22,7 +22,7 @@ class CategoryForm
     {
         return $schema
             ->components([
-                Section::make('Category details')
+                Section::make(__('Category details'))
                     ->columns(2)
                     ->components([
                         TextInput::make('name')
@@ -42,17 +42,17 @@ class CategoryForm
                             ->suffixAction(
                                 Action::make('regenerateSlug')
                                     ->icon('heroicon-o-arrow-path')
-                                    ->tooltip('Regenerate from name')
+                                    ->tooltip(__('Regenerate from name'))
                                     ->action(fn (Get $get, Set $set) => $set('slug', Str::slug((string) $get('name')))),
                             )
-                            ->helperText('Used in the future public URL: /category/{slug}'),
+                            ->helperText(__('Used in the future public URL: /category/{slug}')),
                         Select::make('parent_id')
                             ->label('Parent category')
                             ->relationship('parent', 'name')
                             ->searchable()
                             ->preload()
                             ->native(false)
-                            ->placeholder('No parent (top level)')
+                            ->placeholder(__('No parent (top level)'))
                             ->disableOptionWhen(fn ($value, ?Category $record): bool => $record !== null && (int) $value === (int) $record->getKey()),
                         Textarea::make('description')
                             ->rows(3)
@@ -60,7 +60,7 @@ class CategoryForm
                             ->columnSpanFull(),
                     ]),
 
-                Section::make('Appearance & media')
+                Section::make(__('Appearance & media'))
                     ->columns(2)
                     ->components([
                         FileUpload::make('image_path')
@@ -78,10 +78,10 @@ class CategoryForm
                         TextInput::make('icon')
                             ->label('Heroicon name')
                             ->placeholder('heroicon-o-folder')
-                            ->helperText('Optional Heroicon identifier, e.g. heroicon-o-folder.'),
+                            ->helperText(__('Optional Heroicon identifier, e.g. heroicon-o-folder.')),
                     ]),
 
-                Section::make('Visibility & ordering')
+                Section::make(__('Visibility & ordering'))
                     ->columns(3)
                     ->components([
                         TextInput::make('sort_order')
@@ -93,16 +93,16 @@ class CategoryForm
                         Toggle::make('show_in_menu')->label('Show in menu')->default(true)->inline(false),
                     ]),
 
-                Section::make('SEO')
+                Section::make(__('SEO'))
                     ->icon('heroicon-o-magnifying-glass')
                     ->columns(2)
                     ->components([
                         TextInput::make('seo_title')
                             ->maxLength(70)
-                            ->helperText('Recommended maximum 70 characters.'),
+                            ->helperText(__('Recommended maximum 70 characters.')),
                         TextInput::make('seo_description')
                             ->maxLength(160)
-                            ->helperText('Recommended maximum 160 characters.'),
+                            ->helperText(__('Recommended maximum 160 characters.')),
                     ]),
             ]);
     }

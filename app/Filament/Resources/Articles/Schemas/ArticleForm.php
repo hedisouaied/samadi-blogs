@@ -52,15 +52,15 @@ class ArticleForm
                                     ->suffixAction(
                                         Action::make('regenerateSlug')
                                             ->icon('heroicon-o-arrow-path')
-                                            ->tooltip('Regenerate from title')
+                                            ->tooltip(__('Regenerate from title'))
                                             ->action(fn (Get $get, Set $set) => $set('slug', Str::slug((string) $get('title')))),
                                     )
-                                    ->helperText('Public URL: /blog/{slug}')
+                                    ->helperText(__('Public URL: /blog/{slug}'))
                                     ->columnSpanFull(),
                                 Textarea::make('excerpt')
                                     ->rows(3)
                                     ->maxLength(500)
-                                    ->helperText('Short summary shown in listings and social cards.')
+                                    ->helperText(__('Short summary shown in listings and social cards.'))
                                     ->columnSpanFull(),
                                 RichEditor::make('content')
                                     ->fileAttachmentsDisk('public')
@@ -78,7 +78,7 @@ class ArticleForm
                                     ->searchable()
                                     ->preload()
                                     ->native(false)
-                                    ->helperText('Assign one or more categories.'),
+                                    ->helperText(__('Assign one or more categories.')),
                                 Select::make('tags')
                                     ->relationship('tags', 'name')
                                     ->multiple()
@@ -89,7 +89,7 @@ class ArticleForm
                                         TextInput::make('slug')->maxLength(100),
                                     ])
                                     ->native(false)
-                                    ->helperText('Add or pick tags; new tags are created on the fly.'),
+                                    ->helperText(__('Add or pick tags; new tags are created on the fly.')),
                             ]),
 
                         Tabs\Tab::make('Publishing')
@@ -105,8 +105,8 @@ class ArticleForm
                                     ->dehydrated()
                                     ->helperText(function (): string {
                                         return Auth::user()?->hasPermission(Permission::PublishArticles)
-                                            ? 'Editors with publish rights can move an article through any status.'
-                                            : 'You can save as Draft or submit for review; publishing is done by an editor.';
+                                            ? __('Editors with publish rights can move an article through any status.')
+                                            : __('You can save as Draft or submit for review; publishing is done by an editor.');
                                     }),
                                 Select::make('author_id')
                                     ->label('Author')
@@ -123,7 +123,7 @@ class ArticleForm
                                     ->seconds(false)
                                     ->native(false)
                                     ->visible(fn (Get $get): bool => $get('status') === ArticleStatus::Published->value)
-                                    ->helperText('Leave empty to publish immediately when saved as Published.'),
+                                    ->helperText(__('Leave empty to publish immediately when saved as Published.')),
                                 DateTimePicker::make('scheduled_at')
                                     ->label('Scheduled for')
                                     ->seconds(false)
@@ -150,7 +150,7 @@ class ArticleForm
                                 TextInput::make('featured_image_alt')
                                     ->label('Featured image alt text')
                                     ->maxLength(180)
-                                    ->helperText('Describe the image for accessibility and SEO.'),
+                                    ->helperText(__('Describe the image for accessibility and SEO.')),
                             ]),
 
                         Tabs\Tab::make('SEO')
@@ -158,24 +158,24 @@ class ArticleForm
                             ->schema([
                                 TextInput::make('seo_title')
                                     ->maxLength(70)
-                                    ->helperText('Defaults to the article title. Max 70 characters.')
+                                    ->helperText(__('Defaults to the article title. Max 70 characters.'))
                                     ->columnSpanFull(),
                                 Textarea::make('seo_description')
                                     ->rows(2)
                                     ->maxLength(160)
-                                    ->helperText('Meta description. Max 160 characters.')
+                                    ->helperText(__('Meta description. Max 160 characters.'))
                                     ->columnSpanFull(),
                                 TextInput::make('canonical_url')
                                     ->label('Canonical URL')
                                     ->url()
                                     ->maxLength(255)
-                                    ->helperText('Optional. Use when this content is duplicated elsewhere.'),
+                                    ->helperText(__('Optional. Use when this content is duplicated elsewhere.')),
                                 TextInput::make('reading_time_minutes')
                                     ->label('Reading time (minutes)')
                                     ->numeric()
                                     ->disabled()
                                     ->dehydrated(false)
-                                    ->placeholder('Calculated on save'),
+                                    ->placeholder(__('Calculated on save')),
                                 Toggle::make('seo_noindex')
                                     ->label('No-index this article')
                                     ->default(false)

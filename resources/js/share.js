@@ -17,9 +17,9 @@ export function initShare() {
 
             try {
                 await navigator.clipboard.writeText(url);
-                notify('Link copied');
+                notify(window.i18n?.linkCopied ?? 'Link copied');
             } catch (error) {
-                window.prompt('Copy this link', url);
+                window.prompt(window.i18n?.copyLink ?? 'Copy this link', url);
             }
         });
     });

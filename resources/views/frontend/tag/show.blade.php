@@ -3,19 +3,19 @@
 @section('content')
     <section class="shell pt-12 md:pt-16">
         <x-frontend.breadcrumbs :items="[
-            ['label' => 'Home', 'url' => route('home')],
-            ['label' => 'Journal', 'url' => route('blog.index')],
+            ['label' => __('Home'), 'url' => route('home')],
+            ['label' => __('Journal'), 'url' => route('blog.index')],
             ['label' => $tag->name],
         ]" />
 
         <header class="mt-8 max-w-3xl">
-            <p class="eyebrow eyebrow-accent">Topic</p>
+            <p class="eyebrow eyebrow-accent">{{ __('Topic') }}</p>
             <h1 class="mt-3 font-display text-fluid-display text-ink">#{{ $tag->name }}</h1>
             @if ($tag->description)
                 <p class="mt-5 text-lg leading-relaxed text-muted">{{ $tag->description }}</p>
             @endif
             <p class="mt-5 text-xs uppercase tracking-[0.16em] text-muted">
-                {{ $articles->total() }} {{ \Illuminate\Support\Str::plural('article', $articles->total()) }}
+                {{ trans_choice(':count article|:count articles', $articles->total(), ['count' => $articles->total()]) }}
             </p>
         </header>
     </section>
@@ -33,9 +33,9 @@
                     {{ $articles->links() }}
                 </div>
             @else
-                <x-frontend.empty-state icon="tag" title="No articles with this topic"
-                    description="Try another topic or browse the journal."
-                    :action="route('blog.index')" action-label="Browse the journal" />
+                <x-frontend.empty-state icon="tag" :title="__('No articles with this topic')"
+                    :description="__('Try another topic or browse the journal.')"
+                    :action="route('blog.index')" :action-label="__('Browse the journal')" />
             @endif
         </div>
 

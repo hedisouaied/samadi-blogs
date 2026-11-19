@@ -12,9 +12,11 @@
             <span>{{ format_date(now(), 'l, F j, Y') }}</span>
             <div class="flex items-center gap-5">
                 <a href="{{ route('feed') }}" class="link-underline inline-flex items-center gap-1.5 hover:text-ink">
-                    <x-frontend.icon name="rss" class="h-3.5 w-3.5" /> RSS
+                    <x-frontend.icon name="rss" class="h-3.5 w-3.5" /> {{ __('RSS') }}
                 </a>
-                <a href="#newsletter" class="link-underline hover:text-ink">Newsletter</a>
+                <a href="#newsletter" class="link-underline hover:text-ink">{{ __('Newsletter') }}</a>
+                <span class="h-3 w-px bg-line" aria-hidden="true"></span>
+                @include('frontend.partials.language-switcher')
             </div>
         </div>
     </div>
@@ -24,13 +26,13 @@
 
             {{-- Left: navigation --}}
             <div class="flex items-center gap-4">
-                <button type="button" data-mobile-toggle aria-label="Open menu" aria-expanded="false"
+                <button type="button" data-mobile-toggle aria-label="{{ __('Open menu') }}" aria-expanded="false"
                     aria-controls="mobile-nav"
-                    class="icon-btn -ml-2 lg:hidden">
+                    class="icon-btn -ms-2 lg:hidden">
                     <x-frontend.icon name="menu" />
                 </button>
 
-                <nav aria-label="Primary" class="hidden lg:block">
+                <nav aria-label="{{ __('Primary') }}" class="hidden lg:block">
                     <ul class="flex items-center gap-8">
                         @foreach ($navItems as $item)
                             <li class="group relative">
@@ -40,7 +42,7 @@
                                         {{ $item['label'] }}
                                         <x-frontend.icon name="chevron-down" class="h-3.5 w-3.5 transition-transform duration-300 group-hover:rotate-180" />
                                     </button>
-                                    <div class="invisible absolute left-0 top-full z-20 w-56 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                                    <div class="invisible absolute start-0 top-full z-20 w-56 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                                         <ul class="overflow-hidden rounded-xl border border-line bg-surface p-2 shadow-xl shadow-black/5">
                                             @foreach ($item['children'] as $child)
                                                 <li>
@@ -67,7 +69,7 @@
 
             {{-- Center: wordmark --}}
             <a href="{{ route('home') }}" class="group flex flex-col items-center justify-center text-center"
-                aria-label="{{ $siteName }} — home">
+                aria-label="{{ $siteName }} — {{ __('home') }}">
                 <span class="font-display text-2xl leading-none tracking-tight text-ink transition-colors group-hover:text-accent md:text-[1.75rem]">
                     {{ $siteName }}
                 </span>
@@ -78,18 +80,18 @@
 
             {{-- Right: actions --}}
             <div class="flex items-center justify-end gap-1">
-                <button type="button" data-search-open aria-label="Search" class="icon-btn">
+                <button type="button" data-search-open aria-label="{{ __('Search') }}" class="icon-btn">
                     <x-frontend.icon name="search" />
                 </button>
 
-                <button type="button" data-theme-toggle aria-label="Toggle color theme" class="icon-btn">
+                <button type="button" data-theme-toggle aria-label="{{ __('Toggle color theme') }}" class="icon-btn">
                     <x-frontend.icon name="sun" class="h-5 w-5 dark:hidden" />
                     <x-frontend.icon name="moon" class="hidden h-5 w-5 dark:block" />
                 </button>
 
                 <a href="#newsletter"
-                    class="btn btn-primary ml-2 hidden !px-5 !py-2.5 !text-[0.8125rem] xl:inline-flex">
-                    Subscribe
+                    class="btn btn-primary ms-2 hidden !px-5 !py-2.5 !text-[0.8125rem] xl:inline-flex">
+                    {{ __('Subscribe') }}
                 </a>
             </div>
         </div>

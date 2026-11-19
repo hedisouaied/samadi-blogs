@@ -43,7 +43,7 @@ class CategoriesTable
                     ->searchable()
                     ->sortable()
                     ->weight('semibold')
-                    ->description(fn (Category $record): ?string => $record->parent?->name ? 'Parent: '.$record->parent->name : 'Top level'),
+                    ->description(fn (Category $record): ?string => $record->parent?->name ? __('Parent: :name', ['name' => $record->parent->name]) : __('Top level')),
                 TextColumn::make('slug')
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true)
@@ -80,14 +80,14 @@ class CategoriesTable
                         ->icon('heroicon-o-power')
                         ->action(function (Category $record): void {
                             $record->update(['is_active' => ! $record->is_active]);
-                            Notification::make()->title('Category updated')->success()->send();
+                            Notification::make()->title(__('Category updated'))->success()->send();
                         }),
                     Action::make('toggleFeatured')
                         ->label(fn (Category $record): string => $record->is_featured ? 'Unfeature' : 'Feature')
                         ->icon('heroicon-o-star')
                         ->action(function (Category $record): void {
                             $record->update(['is_featured' => ! $record->is_featured]);
-                            Notification::make()->title('Category updated')->success()->send();
+                            Notification::make()->title(__('Category updated'))->success()->send();
                         }),
                     DeleteAction::make(),
                 ]),
@@ -113,8 +113,8 @@ class CategoriesTable
                     ForceDeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No categories yet')
-            ->emptyStateDescription('Create categories to organise your articles.')
+            ->emptyStateHeading(__('No categories yet'))
+            ->emptyStateDescription(__('Create categories to organise your articles.'))
             ->emptyStateIcon('heroicon-o-folder');
     }
 }

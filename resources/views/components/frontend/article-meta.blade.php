@@ -29,6 +29,6 @@
 
     @if ($article->reading_time_minutes)
         <span aria-hidden="true">&middot;</span>
-        <span>{{ $article->reading_time_minutes }} min read</span>
+        <span>{{ __(':count min read', ['count' => $article->reading_time_minutes]) }}</span>
     @endif
 </div>

@@ -34,6 +34,11 @@ For architecture and domain detail see the `docs/` folder and the project skill 
 - Factories rely on model events for slug generation, so seeders must not use
   `WithoutModelEvents`.
 - Do not add code comments unless explicitly asked.
+- The UI is translated into English, French and Arabic (RTL). Wrap every user-facing
+  string in `__()` with the English text as the key, and add it to both
+  `lang/fr.json` and `lang/ar.json`. On the public site, use logical Tailwind
+  utilities (`ms-*`, `ps-*`, `start-*`, `text-start`) instead of left/right ones.
+  See `docs/localization.md`.
 
 ## Filament 5 notes
 

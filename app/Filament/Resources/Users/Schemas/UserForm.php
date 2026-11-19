@@ -19,8 +19,8 @@ class UserForm
     {
         return $schema
             ->components([
-                Section::make('Identity')
-                    ->description('Basic profile information for this administrator or author.')
+                Section::make(__('Identity'))
+                    ->description(__('Basic profile information for this administrator or author.'))
                     ->icon('heroicon-o-user-circle')
                     ->columns(2)
                     ->components([
@@ -32,7 +32,7 @@ class UserForm
                             ->maxLength(60)
                             ->unique(ignoreRecord: true)
                             ->alphaDash()
-                            ->helperText('Optional public handle. Letters, numbers, dashes and underscores only.'),
+                            ->helperText(__('Optional public handle. Letters, numbers, dashes and underscores only.')),
                         TextInput::make('email')
                             ->label('Email address')
                             ->email()
@@ -49,7 +49,7 @@ class UserForm
                             ->columnSpanFull(),
                     ]),
 
-                Section::make('Avatar')
+                Section::make(__('Avatar'))
                     ->icon('heroicon-o-photo')
                     ->columns(2)
                     ->components([
@@ -64,11 +64,11 @@ class UserForm
                             ->visibility('public')
                             ->maxSize(2048)
                             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                            ->helperText('Square image recommended, maximum 2 MB.'),
+                            ->helperText(__('Square image recommended, maximum 2 MB.')),
                     ]),
 
-                Section::make('Role & access')
-                    ->description('Determines what this user can see and do in the back office.')
+                Section::make(__('Role & access'))
+                    ->description(__('Determines what this user can see and do in the back office.'))
                     ->icon('heroicon-o-shield-check')
                     ->columns(2)
                     ->components([
@@ -78,15 +78,15 @@ class UserForm
                             ->native(false)
                             ->live()
                             ->disabled(fn (?User $record): bool => $record !== null && ! self::actorCanManageRoles())
-                            ->helperText('Only Super Admins may promote a user to Super Admin.'),
+                            ->helperText(__('Only Super Admins may promote a user to Super Admin.')),
                         Select::make('status')
                             ->options(UserStatus::options())
                             ->required()
                             ->native(false),
                     ]),
 
-                Section::make('Password')
-                    ->description('Leave blank when editing to keep the current password.')
+                Section::make(__('Password'))
+                    ->description(__('Leave blank when editing to keep the current password.'))
                     ->icon('heroicon-o-key')
                     ->columns(2)
                     ->components([
@@ -99,7 +99,7 @@ class UserForm
                             ->dehydrated(fn ($state): bool => filled($state))
                             ->required(fn (string $operation): bool => $operation === 'create')
                             ->same('password_confirmation')
-                            ->helperText('Minimum 8 characters.'),
+                            ->helperText(__('Minimum 8 characters.')),
                         TextInput::make('password_confirmation')
                             ->label('Confirm password')
                             ->password()

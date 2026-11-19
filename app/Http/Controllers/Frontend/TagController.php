@@ -24,7 +24,7 @@ class TagController extends Controller
             'trending' => $this->content->trendingArticles(4),
             'seo' => Seo::make([
                 'title' => '#'.$tag->name,
-                'description' => $tag->description ?: 'Articles filed under the “'.$tag->name.'” topic.',
+                'description' => $tag->description ?: __('Articles filed under the “:tag” topic.', ['tag' => $tag->name]),
                 'canonical' => route('tags.show', $tag->slug),
                 'schema' => [
                     [

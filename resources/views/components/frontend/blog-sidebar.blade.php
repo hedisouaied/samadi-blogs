@@ -4,7 +4,7 @@
 
     @if ($categories->isNotEmpty())
         <div class="rounded-2xl border border-line bg-surface p-6">
-            <h2 class="eyebrow">Sections</h2>
+            <h2 class="eyebrow">{{ __('Sections') }}</h2>
             <ul class="mt-5 space-y-1">
                 @foreach ($categories as $category)
                     <li>
@@ -24,7 +24,7 @@
 
     @if ($trending->isNotEmpty())
         <div>
-            <h2 class="eyebrow border-b border-line pb-4">Most read</h2>
+            <h2 class="eyebrow border-b border-line pb-4">{{ __('Most read') }}</h2>
             <ol class="mt-5 space-y-5">
                 @foreach ($trending as $index => $article)
                     <li>
@@ -41,7 +41,7 @@
 
     @if ($tags->isNotEmpty())
         <div>
-            <h2 class="eyebrow border-b border-line pb-4">Topics</h2>
+            <h2 class="eyebrow border-b border-line pb-4">{{ __('Topics') }}</h2>
             <div class="mt-5 flex flex-wrap gap-2">
                 @foreach ($tags as $tag)
                     <x-frontend.tag-pill :tag="$tag" />
@@ -51,9 +51,9 @@
     @endif
 
     <div class="rounded-2xl bg-ink p-6 text-bg">
-        <p class="eyebrow !text-white/60">Newsletter</p>
-        <h2 class="mt-3 font-display text-2xl text-white">Never miss an essay</h2>
-        <p class="mt-2 mb-5 text-sm leading-relaxed text-white/70">A considered digest of new writing, occasionally.</p>
+        <p class="eyebrow !text-white/60">{{ __('Newsletter') }}</p>
+        <h2 class="mt-3 font-display text-2xl text-white">{{ __('Never miss an essay') }}</h2>
+        <p class="mt-2 mb-5 text-sm leading-relaxed text-white/70">{{ __('A considered digest of new writing, occasionally.') }}</p>
         <x-frontend.newsletter-form variant="dark" compact :id="'sidebar-newsletter'" />
     </div>
 </aside>

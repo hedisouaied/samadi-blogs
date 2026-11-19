@@ -19,6 +19,11 @@ class RevisionsRelationManager extends RelationManager
 {
     protected static string $relationship = 'revisions';
 
+    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    {
+        return __('Revisions');
+    }
+
     public static function isAvailable(Panel $panel): bool
     {
         return true;
@@ -32,6 +37,8 @@ class RevisionsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->modelLabel(__('revision'))
+            ->pluralModelLabel(__('revisions'))
             ->defaultSort('id', 'desc')
             ->columns([
                 TextColumn::make('id')
@@ -41,7 +48,7 @@ class RevisionsRelationManager extends RelationManager
                     ->sortable(),
                 TextColumn::make('user.name')
                     ->label('Edited by')
-                    ->placeholder('System'),
+                    ->placeholder(__('System')),
                 TextColumn::make('title')
                     ->limit(40)
                     ->wrap(),
@@ -51,7 +58,7 @@ class RevisionsRelationManager extends RelationManager
                 TextColumn::make('note')
                     ->limit(40)
                     ->color('gray')
-                    ->placeholder('—'),
+                    ->placeholder(__('—')),
                 TextColumn::make('created_at')
                     ->label('Saved')
                     ->since()
@@ -62,7 +69,7 @@ class RevisionsRelationManager extends RelationManager
                     ->label('View')
                     ->icon('heroicon-o-eye')
                     ->schema([
-                        Section::make('Revision content')
+                        Section::make(__('Revision content'))
                             ->schema([
                                 TextEntry::make('title')
                                     ->label('Title')
@@ -75,7 +82,7 @@ class RevisionsRelationManager extends RelationManager
                                 TextEntry::make('excerpt')
                                     ->label('Excerpt')
                                     ->state(fn (ArticleRevision $record): ?string => $record->excerpt)
-                                    ->placeholder('—'),
+                                    ->placeholder(__('—')),
                                 TextEntry::make('content')
                                     ->label('Content')
                                     ->state(fn (ArticleRevision $record): ?string => $record->content)
@@ -87,13 +94,13 @@ class RevisionsRelationManager extends RelationManager
                             ->columnSpanFull(),
                     ])
                     ->modalSubmitAction(false)
-                    ->modalCancelActionLabel('Close'),
+                    ->modalCancelActionLabel(__('Close')),
                 Action::make('restore')
                     ->label('Restore this revision')
                     ->icon('heroicon-o-arrow-uturn-left')
                     ->color('warning')
                     ->requiresConfirmation()
-                    ->modalDescription('Apply the title, slug, excerpt and content of this revision back to the live article? A new revision is recorded so nothing is lost.')
+                    ->modalDescription(__('Apply the title, slug, excerpt and content of this revision back to the live article? A new revision is recorded so nothing is lost.'))
                     ->action(function (ArticleRevision $record): void {
                         $article = $record->article;
 
@@ -107,14 +114,14 @@ class RevisionsRelationManager extends RelationManager
                         app(ArticleService::class)->captureRevision($article, Auth::user(), "Restored from revision #{$record->getKey()}");
 
                         Notification::make()
-                            ->title('Revision restored')
+                            ->title(__('Revision restored'))
                             ->success()
                             ->send();
                     }),
             ])
             ->toolbarActions([])
             ->headerActions([])
-            ->emptyStateHeading('No revisions yet')
-            ->emptyStateDescription('Every publish or content edit snapshots a revision.');
+            ->emptyStateHeading(__('No revisions yet'))
+            ->emptyStateDescription(__('Every publish or content edit snapshots a revision.'));
     }
 }

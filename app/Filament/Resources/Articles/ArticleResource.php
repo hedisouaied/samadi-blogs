@@ -26,11 +26,13 @@ use UnitEnum;
 
 class ArticleResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = Article::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Content';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Content;
 
     protected static ?int $navigationSort = 1;
 

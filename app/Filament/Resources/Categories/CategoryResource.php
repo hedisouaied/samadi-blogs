@@ -21,11 +21,13 @@ use UnitEnum;
 
 class CategoryResource extends Resource
 {
+    use \App\Filament\Concerns\TranslatesResourceLabels;
+
     protected static ?string $model = Category::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFolder;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Content';
+    protected static string|UnitEnum|null $navigationGroup = \App\Enums\AdminNavigationGroup::Content;
 
     protected static ?int $navigationSort = 2;
 

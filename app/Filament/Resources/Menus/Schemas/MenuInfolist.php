@@ -14,12 +14,12 @@ class MenuInfolist
     {
         return $schema
             ->components([
-                Section::make('Menu')
+                Section::make(__('Menu'))
                     ->columns(2)
                     ->components([
                         TextEntry::make('name')->weight('bold'),
                         TextEntry::make('slug')->copyable(),
-                        TextEntry::make('description')->columnSpanFull()->placeholder('—'),
+                        TextEntry::make('description')->columnSpanFull()->placeholder(__('—')),
                         TextEntry::make('items_count')
                             ->label('Items')
                             ->state(fn (Menu $record): int => $record->items()->count())

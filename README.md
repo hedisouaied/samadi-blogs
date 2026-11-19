@@ -154,6 +154,7 @@ in production) for automatic publishing.
 - [`docs/settings.md`](docs/settings.md) — how settings work and how to extend them
 - [`docs/media-and-menus.md`](docs/media-and-menus.md) — media library & menu builder
 - [`docs/deployment.md`](docs/deployment.md) — production checklist
+- [`docs/localization.md`](docs/localization.md) — English, French and Arabic support
 
 ---
 

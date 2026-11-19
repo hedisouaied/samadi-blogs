@@ -89,7 +89,7 @@ class Comment extends Model
 
     public function getDisplayAuthorNameAttribute(): string
     {
-        return $this->user?->name ?: ($this->author_name ?: 'Guest');
+        return $this->user?->name ?: ($this->author_name ?: __('Guest'));
     }
 
     public function getDisplayAuthorEmailAttribute(): ?string

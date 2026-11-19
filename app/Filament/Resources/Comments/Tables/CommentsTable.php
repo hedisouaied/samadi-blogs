@@ -34,7 +34,7 @@ class CommentsTable
                     ->limit(70)
                     ->wrap()
                     ->description(fn (Comment $record): string => $record->display_author_name
-                        .($record->user ? ' · member' : ' · guest')
+                        .($record->user ? __(' · member') : __(' · guest'))
                         .' · on '.$record->article?->title),
                 TextColumn::make('status')
                     ->badge()
@@ -55,7 +55,7 @@ class CommentsTable
                 TextColumn::make('approved_at')
                     ->label('Approved')
                     ->since()
-                    ->placeholder('—')
+                    ->placeholder(__('—'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Submitted')
@@ -77,7 +77,7 @@ class CommentsTable
                     ->relationship('user', 'name')
                     ->searchable()
                     ->preload()
-                    ->placeholder('Guests only'),
+                    ->placeholder(__('Guests only')),
                 TernaryFilter::make('is_pinned')->label('Pinned'),
             ])
             ->recordActions([
@@ -94,11 +94,11 @@ class CommentsTable
                             $ok = app(CommentService::class)->approve($record, Auth::user());
 
                             if ($ok) {
-                                Notification::make()->title('Comment approved')->success()->send();
+                                Notification::make()->title(__('Comment approved'))->success()->send();
                             } else {
                                 Notification::make()
-                                    ->title('Cannot approve yet')
-                                    ->body('Approve the parent comment first.')
+                                    ->title(__('Cannot approve yet'))
+                                    ->body(__('Approve the parent comment first.'))
                                     ->warning()
                                     ->send();
                             }
@@ -110,7 +110,7 @@ class CommentsTable
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::ModerateComments) ?? false)
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->reject($record, Auth::user());
-                            Notification::make()->title('Comment rejected')->success()->send();
+                            Notification::make()->title(__('Comment rejected'))->success()->send();
                         }),
                     Action::make('spam')
                         ->label('Mark as spam')
@@ -118,7 +118,7 @@ class CommentsTable
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::ModerateComments) ?? false)
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->markAsSpam($record, Auth::user());
-                            Notification::make()->title('Marked as spam')->success()->send();
+                            Notification::make()->title(__('Marked as spam'))->success()->send();
                         }),
                     Action::make('trash')
                         ->label('Move to trash')
@@ -126,7 +126,7 @@ class CommentsTable
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::ModerateComments) ?? false)
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->moveToTrash($record, Auth::user());
-                            Notification::make()->title('Moved to trash')->success()->send();
+                            Notification::make()->title(__('Moved to trash'))->success()->send();
                         }),
                     Action::make('pin')
                         ->label(fn (Comment $record): string => $record->is_pinned ? 'Unpin' : 'Pin')
@@ -134,15 +134,15 @@ class CommentsTable
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::ModerateComments) ?? false)
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->togglePinned($record, Auth::user());
-                            Notification::make()->title('Comment updated')->success()->send();
+                            Notification::make()->title(__('Comment updated'))->success()->send();
                         }),
                     DeleteAction::make()
                         ->requiresConfirmation()
-                        ->modalDescription('Replies are preserved and re-attached to this comment\'s parent.')
+                        ->modalDescription(__('Replies are preserved and re-attached to this comment\'s parent.'))
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::DeleteComments) ?? false)
                         ->action(function (Comment $record): void {
                             app(CommentService::class)->deletePreservingReplies($record, Auth::user());
-                            Notification::make()->title('Comment deleted')->success()->send();
+                            Notification::make()->title(__('Comment deleted'))->success()->send();
                         }),
                 ]),
             ])
@@ -163,7 +163,9 @@ class CommentsTable
                             }
 
                             Notification::make()
-                                ->title("Approved {$approved} comment(s)".($blocked ? ", {$blocked} skipped (parent not approved)" : ''))
+                                ->title($blocked
+                                    ? __('Approved :approved comment(s), :blocked skipped (parent not approved)', ['approved' => $approved, 'blocked' => $blocked])
+                                    : __('Approved :approved comment(s)', ['approved' => $approved]))
                                 ->success()
                                 ->send();
                         })
@@ -176,15 +178,15 @@ class CommentsTable
                         ->action(function (Collection $records): void {
                             $service = app(CommentService::class);
                             $records->each(fn (Comment $comment) => $service->markAsSpam($comment, Auth::user()));
-                            Notification::make()->title('Marked as spam')->success()->send();
+                            Notification::make()->title(__('Marked as spam'))->success()->send();
                         })
                         ->deselectRecordsAfterCompletion(),
                     DeleteBulkAction::make()
                         ->visible(fn (): bool => Auth::user()?->hasPermission(Permission::DeleteComments) ?? false),
                 ]),
             ])
-            ->emptyStateHeading('No comments')
-            ->emptyStateDescription('Moderate reader comments from the public site here.')
+            ->emptyStateHeading(__('No comments'))
+            ->emptyStateDescription(__('Moderate reader comments from the public site here.'))
             ->emptyStateIcon('heroicon-o-chat-bubble-left-right');
     }
 }

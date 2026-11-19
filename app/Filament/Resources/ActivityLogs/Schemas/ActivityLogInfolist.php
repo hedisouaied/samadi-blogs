@@ -12,27 +12,27 @@ class ActivityLogInfolist
     {
         return $schema
             ->components([
-                Section::make('Activity')
+                Section::make(__('Activity'))
                     ->columns(2)
                     ->components([
                         TextEntry::make('action_label')->label('Action')->badge()->color('info'),
                         TextEntry::make('created_at')->label('When')->dateTime('M j, Y H:i:s'),
-                        TextEntry::make('user.name')->label('Performed by')->placeholder('System'),
+                        TextEntry::make('user.name')->label('Performed by')->placeholder(__('System')),
                         TextEntry::make('subject')
                             ->label('Subject')
-                            ->placeholder('—')
+                            ->placeholder(__('—'))
                             ->state(fn ($record): string => $record->subject
                                 ? class_basename($record->subject).' #'.$record->subject_id
-                                : '—'),
-                        TextEntry::make('description')->columnSpanFull()->placeholder('—'),
-                        TextEntry::make('ip_address')->label('IP address')->placeholder('—'),
+                                : __('—')),
+                        TextEntry::make('description')->columnSpanFull()->placeholder(__('—')),
+                        TextEntry::make('ip_address')->label('IP address')->placeholder(__('—')),
                         TextEntry::make('properties')
                             ->label('Details')
                             ->formatStateUsing(fn ($state): ?string => filled($state)
                                 ? json_encode($state, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
                                 : null)
                             ->columnSpanFull()
-                            ->placeholder('No extra details recorded.'),
+                            ->placeholder(__('No extra details recorded.')),
                     ]),
             ]);
     }

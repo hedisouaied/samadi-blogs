@@ -1,7 +1,31 @@
 {
-  "_fonts-B6Keb0db.css": {
-    "file": "assets/fonts-B6Keb0db.css",
-    "src": "_fonts-B6Keb0db.css"
+  "_fonts-vjplDo6G.css": {
+    "file": "assets/fonts-vjplDo6G.css",
+    "src": "_fonts-vjplDo6G.css"
+  },
+  "_ibm-plex-sans-arabic-400-normal-Bo5KPYvw.woff2": {
+    "file": "assets/ibm-plex-sans-arabic-400-normal-Bo5KPYvw.woff2",
+    "src": "_ibm-plex-sans-arabic-400-normal-Bo5KPYvw.woff2"
+  },
+  "_ibm-plex-sans-arabic-400-normal-CFZh1unN.woff": {
+    "file": "assets/ibm-plex-sans-arabic-400-normal-CFZh1unN.woff",
+    "src": "_ibm-plex-sans-arabic-400-normal-CFZh1unN.woff"
+  },
+  "_ibm-plex-sans-arabic-500-normal-BletK1Hp.woff": {
+    "file": "assets/ibm-plex-sans-arabic-500-normal-BletK1Hp.woff",
+    "src": "_ibm-plex-sans-arabic-500-normal-BletK1Hp.woff"
+  },
+  "_ibm-plex-sans-arabic-500-normal-Cd6jVIg7.woff2": {
+    "file": "assets/ibm-plex-sans-arabic-500-normal-Cd6jVIg7.woff2",
+    "src": "_ibm-plex-sans-arabic-500-normal-Cd6jVIg7.woff2"
+  },
+  "_ibm-plex-sans-arabic-600-normal-Dk5eISD_.woff": {
+    "file": "assets/ibm-plex-sans-arabic-600-normal-Dk5eISD_.woff",
+    "src": "_ibm-plex-sans-arabic-600-normal-Dk5eISD_.woff"
+  },
+  "_ibm-plex-sans-arabic-600-normal-KrqB56Mw.woff2": {
+    "file": "assets/ibm-plex-sans-arabic-600-normal-KrqB56Mw.woff2",
+    "src": "_ibm-plex-sans-arabic-600-normal-KrqB56Mw.woff2"
   },
   "_instrument-sans-400-italic-CX4K8MRt.woff": {
     "file": "assets/instrument-sans-400-italic-CX4K8MRt.woff",
@@ -147,8 +171,40 @@
     "file": "assets/newsreader-700-normal-rIgV_oaK.woff2",
     "src": "_newsreader-700-normal-rIgV_oaK.woff2"
   },
+  "_noto-naskh-arabic-400-normal-Dajb6q3W.woff2": {
+    "file": "assets/noto-naskh-arabic-400-normal-Dajb6q3W.woff2",
+    "src": "_noto-naskh-arabic-400-normal-Dajb6q3W.woff2"
+  },
+  "_noto-naskh-arabic-400-normal-pwOnwvFs.woff": {
+    "file": "assets/noto-naskh-arabic-400-normal-pwOnwvFs.woff",
+    "src": "_noto-naskh-arabic-400-normal-pwOnwvFs.woff"
+  },
+  "_noto-naskh-arabic-500-normal-Bhl__RG1.woff2": {
+    "file": "assets/noto-naskh-arabic-500-normal-Bhl__RG1.woff2",
+    "src": "_noto-naskh-arabic-500-normal-Bhl__RG1.woff2"
+  },
+  "_noto-naskh-arabic-500-normal-CYujSvJF.woff": {
+    "file": "assets/noto-naskh-arabic-500-normal-CYujSvJF.woff",
+    "src": "_noto-naskh-arabic-500-normal-CYujSvJF.woff"
+  },
+  "_noto-naskh-arabic-600-normal-16Vd4b9R.woff": {
+    "file": "assets/noto-naskh-arabic-600-normal-16Vd4b9R.woff",
+    "src": "_noto-naskh-arabic-600-normal-16Vd4b9R.woff"
+  },
+  "_noto-naskh-arabic-600-normal-DByBVxli.woff2": {
+    "file": "assets/noto-naskh-arabic-600-normal-DByBVxli.woff2",
+    "src": "_noto-naskh-arabic-600-normal-DByBVxli.woff2"
+  },
+  "_noto-naskh-arabic-700-normal-CG_vrPqD.woff2": {
+    "file": "assets/noto-naskh-arabic-700-normal-CG_vrPqD.woff2",
+    "src": "_noto-naskh-arabic-700-normal-CG_vrPqD.woff2"
+  },
+  "_noto-naskh-arabic-700-normal-DP4-Rtre.woff": {
+    "file": "assets/noto-naskh-arabic-700-normal-DP4-Rtre.woff",
+    "src": "_noto-naskh-arabic-700-normal-DP4-Rtre.woff"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-LkVJEeQI.css",
+    "file": "assets/app-C4cCIjAq.css",
     "name": "app",
     "names": [
       "app.css"
@@ -157,7 +213,7 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-CHeAvm1O.js",
+    "file": "assets/app-By0a4jp2.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

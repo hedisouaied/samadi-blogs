@@ -15,11 +15,11 @@ class NewsletterController extends Controller
     public function subscribe(Request $request)
     {
         if (! (bool) setting('newsletter.newsletter_enabled', true)) {
-            return $this->respond($request, false, 'Newsletter sign-ups are currently paused.', 423);
+            return $this->respond($request, false, __('Newsletter sign-ups are currently paused.'), 423);
         }
 
         if ($request->filled('website')) {
-            return $this->respond($request, true, 'Thanks for subscribing.');
+            return $this->respond($request, true, __('Thanks for subscribing.'));
         }
 
         $data = $request->validate([
@@ -31,7 +31,7 @@ class NewsletterController extends Controller
         $key = 'newsletter:'.$request->ip();
 
         if (RateLimiter::tooManyAttempts($key, 5)) {
-            return $this->respond($request, false, 'Too many requests. Please try again in a moment.', 429);
+            return $this->respond($request, false, __('Too many requests. Please try again in a moment.'), 429);
         }
 
         RateLimiter::hit($key, 60);
@@ -54,8 +54,8 @@ class NewsletterController extends Controller
         $subscriber->save();
 
         $message = $newlyPending
-            ? 'Almost there — check your inbox to confirm your subscription.'
-            : 'You are subscribed. Welcome aboard.';
+            ? __('Almost there — check your inbox to confirm your subscription.')
+            : __('You are subscribed. Welcome aboard.');
 
         return $this->respond($request, true, $message);
     }
@@ -69,7 +69,7 @@ class NewsletterController extends Controller
 
             $this->performUnsubscribe($data['email']);
 
-            return $this->respond($request, true, 'You have been unsubscribed.');
+            return $this->respond($request, true, __('You have been unsubscribed.'));
         }
 
         if ($request->filled('email') && $request->hasValidSignature()) {
@@ -79,7 +79,7 @@ class NewsletterController extends Controller
                 'email' => (string) $request->query('email'),
                 'done' => true,
                 'seo' => Seo::make([
-                    'title' => 'Unsubscribed',
+                    'title' => __('Unsubscribed'),
                     'robots' => 'noindex,follow',
                 ]),
             ]);
@@ -89,7 +89,7 @@ class NewsletterController extends Controller
             'email' => (string) $request->query('email', ''),
             'done' => false,
             'seo' => Seo::make([
-                'title' => 'Unsubscribe',
+                'title' => __('Unsubscribe'),
                 'robots' => 'noindex,follow',
             ]),
         ]);

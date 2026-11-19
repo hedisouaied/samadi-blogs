@@ -24,8 +24,8 @@ class SearchController extends Controller
             'categories' => $this->content->categories(),
             'tags' => $this->content->tags(14),
             'seo' => Seo::make([
-                'title' => $term !== '' ? 'Search: '.$term : 'Search',
-                'description' => 'Search the archive of '.setting('general.site_name', config('app.name')).'.',
+                'title' => $term !== '' ? __('Search: :term', ['term' => $term]) : __('Search'),
+                'description' => __('Search the archive of :site.', ['site' => setting('general.site_name', config('app.name'))]),
                 'canonical' => route('search'),
                 'robots' => $term !== '' && ($results === null || $results->total() === 0) ? 'noindex,follow' : null,
             ]),

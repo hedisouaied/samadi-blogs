@@ -42,7 +42,7 @@ class MenusTable
                         ->icon('heroicon-o-power')
                         ->action(function (Menu $record): void {
                             $record->update(['is_active' => ! $record->is_active]);
-                            Notification::make()->title('Menu updated')->success()->send();
+                            Notification::make()->title(__('Menu updated'))->success()->send();
                         }),
                     DeleteAction::make(),
                 ]),
@@ -52,8 +52,8 @@ class MenusTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('No menus yet')
-            ->emptyStateDescription('Build navigation menus for the public site.')
+            ->emptyStateHeading(__('No menus yet'))
+            ->emptyStateDescription(__('Build navigation menus for the public site.'))
             ->emptyStateIcon('heroicon-o-bars-3');
     }
 }

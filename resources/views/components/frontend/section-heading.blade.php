@@ -3,7 +3,7 @@
     'title' => null,
     'description' => null,
     'href' => null,
-    'linkLabel' => 'View all',
+    'linkLabel' => __('View all'),
 ])
 
 <div {{ $attributes->merge(['class' => 'flex flex-wrap items-end justify-between gap-6 border-b border-line pb-6']) }}>
@@ -23,7 +23,7 @@
         <a href="{{ $href }}"
             class="link-underline group inline-flex items-center gap-2 whitespace-nowrap text-sm font-medium text-ink">
             {{ $linkLabel }}
-            <x-frontend.icon name="arrow-right" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            <x-frontend.icon name="arrow-right" class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
         </a>
     @endif
 </div>
